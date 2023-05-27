@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "408583851820",
+    "project_id": "rigel-psy",
+    "storage_bucket": "rigel-psy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408583851820:android:7e8ce81dfbf18157f8e689",
+        "android_client_info": {
+          "package_name": "com.listenmebabysapplication.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408583851820-a6k8gsg8e83ord8d3orcu2gm4nhms5c2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDprVPSCYx63aN6SdnSz2XeqRUrYd6TNV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408583851820-a6k8gsg8e83ord8d3orcu2gm4nhms5c2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
