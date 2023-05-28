@@ -72,9 +72,9 @@ class TabWidget extends StatelessWidget {
             playFun: (val) async {
 
               if(getDataFromRemote) {
-                await controller.audioInstance.setUrl((await tab.audioAssets())![i].audioAsset, initialPosition: Duration.zero);
+                await controller.audioInstance.setUrl((await tab.audioAssets())![i].audioAsset, initialPosition: val);
               } else
-                await controller.audioInstance.setAudioSource(AudioSource.file((await tab.audioAssets())![i].audioAsset), initialPosition: Duration.zero);
+                await controller.audioInstance.setAudioSource(AudioSource.file((await tab.audioAssets())![i].audioAsset), initialPosition: val);
 
               await controller.audioInstance.play();
             },

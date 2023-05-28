@@ -114,7 +114,15 @@ class AudioCardWidget extends StatelessWidget {
                               if(state == AudioState.Stopped){
                                 state = AudioState.Playing;
                                 playFun!(duration);
-                                _timer = Timer.periodic(Duration(seconds: 1), (timer) {duration = Duration(seconds: duration.inSeconds + 1);
+                                _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+                                  duration = Duration(seconds: duration.inSeconds + 1);
+                                  if(duration.inSeconds.toDouble() >= maxDuration.inSeconds.toDouble()){
+                                    controller.currentAudioIndex = index;
+                                    _timer.cancel();
+                                    stopFun!();
+                                    state = AudioState.Stopped;
+                                    duration = Duration.zero;
+                                  }
                                 _c.update();
                                 });
 
@@ -145,7 +153,7 @@ class AudioCardWidget extends StatelessWidget {
                                     thumbShape: RoundSliderThumbShape(enabledThumbRadius: 4),
                                 ),
                                 child: Slider(
-                                  value: duration.inSeconds.toDouble(),
+                                  value: duration.inSeconds.toDouble() >= maxDuration.inSeconds.toDouble() ? maxDuration.inSeconds.toDouble() : duration.inSeconds.toDouble(),
                                   min: 0.0,
                                   thumbColor: ColorConstant.cyan700,
                                   activeColor: ColorConstant.cyan700,
