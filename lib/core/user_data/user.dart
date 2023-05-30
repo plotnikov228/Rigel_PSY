@@ -1,5 +1,7 @@
 import 'package:listenmebaby71_s_application17/core/models/tariff_model.dart';
 import 'package:listenmebaby71_s_application17/core/user_data/user_repo.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 
 import '../../presentation/k17_screen/repository.dart';
 import '../models/user_model.dart';
@@ -27,6 +29,20 @@ class CurrentUser extends UserModel {
   static final repo = UserRepo();
 
   static Future init() async {
+
+
+    if(Platform.isIOS) {
+      var status = await Permission.storage.status;
+      if (status.isDenied) {
+        // You can request multiple permissions at once.
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.storage,
+          Permission.camera,
+        ].request();
+        print(statuses[Permission.storage]);
+      }
+    }
+
     user.login = await repo.getLogin();
     user.password = await repo.getPass();
     user.number = await repo.getNumber();

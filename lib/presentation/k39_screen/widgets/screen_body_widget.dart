@@ -30,10 +30,10 @@ class ScreenBodyWidget extends StatelessWidget {
         children: paths
             .map((e) => ListglobeItemWidget(e.title,
                 params: e.param,
-                svgFile: NegativeEmotionTabs.dataSource == DataSource.Local
+                svgFile: !NegativeEmotionTabs.dataSourceIsRemote()
                     ? File(e.svgIcon)
                     : null,
-                svgUrl: NegativeEmotionTabs.dataSource == DataSource.Remote
+                svgUrl: NegativeEmotionTabs.dataSourceIsRemote()
                     ? e.svgIcon
                     : null))
             .toList(),

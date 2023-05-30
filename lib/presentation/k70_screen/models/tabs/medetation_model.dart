@@ -23,7 +23,7 @@ class MeditationModel extends NegativeEmotionsModelTab{
     for (var item in collection.docs) {
       final audio = Audio.fromJson(item.data());
        String filePath = appDocPath + '/' + '${audio.folder}/${audio.fileName}.${audio.format}';
-      if(NegativeEmotionTabs.dataSource == DataSource.Remote) {
+      if(NegativeEmotionTabs.dataSourceIsRemote()) {
         filePath = audio.url;
       }
       if(audio.tab == 'meditation')

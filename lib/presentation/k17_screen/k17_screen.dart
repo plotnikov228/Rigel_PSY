@@ -20,6 +20,7 @@ class K17Screen extends StatelessWidget {
       AppRoutes.currentRoute = AppRoutes.k20Screen;
       Navigator.pushReplacementNamed(context, AppRoutes.k20Screen);
       } catch(_) {
+        print(_);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ошибка, проверьте подключение к интернету или попробуйте позднее')));
       }
     });

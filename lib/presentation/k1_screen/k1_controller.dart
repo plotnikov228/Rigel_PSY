@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -34,45 +35,50 @@ class K1Controller extends GetxController {
       });
 
   void initialization(BuildContext context) async {
-    if(wasInit != true) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+  try {
+      if (wasInit != true) {
+        wasInit = true;
+        await someProcess();
 
-      wasInit = true;
-      await someProcess();
+        await NegativeEmotionTabs.getTabs(context);
 
-      await NegativeEmotionTabs.getTabs();
+        final controller = Get.put(K70Controller());
+        await controller.initNegativeEmotions();
+        if (!NegativeEmotionTabs.dataSourceIsRemote()) {
 
-      final controller = Get.put(K70Controller());
-      await controller.initNegativeEmotions();
-      if(NegativeEmotionTabs.dataSource == DataSource.Local){
-        var collectionAudio =
-        await FirebaseFirestore.instance.collection('Audio').get();
-        var collectionImages =
-        await FirebaseFirestore.instance.collection('Tabs_Images').get();
+          var collectionAudio =
+          await FirebaseFirestore.instance.collection('Audio').get();
+          var collectionImages =
+          await FirebaseFirestore.instance.collection('Tabs_Images').get();
 
-        SharedPreferences prefs = await SharedPreferences.getInstance();
 
-        final IMAGE_KEY = 'images_data';
-        final AUDIO_KEY = 'audio_data';
-        if ((prefs.getString(IMAGE_KEY) ?? '') !=
-            collectionImages.docs.toString() ||
-            (prefs.getString(AUDIO_KEY) ?? '') !=
-                collectionAudio.docs.toString()) {
-          loading = true;
-          update();
-          downloadingFiles([collectionAudio, collectionImages], prefs,
-              [AUDIO_KEY, IMAGE_KEY]).then((value) {
+          final IMAGE_KEY = 'images_data';
+          final AUDIO_KEY = 'audio_data';
+          if ((prefs.getString(IMAGE_KEY) ?? '') !=
+              collectionImages.docs.toString() ||
+              (prefs.getString(AUDIO_KEY) ?? '') !=
+                  collectionAudio.docs.toString()) {
+            loading = true;
+            update();
+            downloadingFiles([collectionAudio, collectionImages], prefs,
+                [AUDIO_KEY, IMAGE_KEY]).then((value) {
+              loading = false;
+              secondsToNewPage = 0;
+              timer(context);
+            });
+          } else {
             loading = false;
-            secondsToNewPage = 0;
-            timer(context);
-          });
-        } else {
-          loading = false;
+          }
+        } else
+          timer(context);
+      }
+    } catch (_) {
+    timer(context);
 
-        }
-      } else
-      timer(context);
     }
   }
+
   final storage = CloudStorageService();
 
   Future downloadingFiles(List<QuerySnapshot<Map<String, dynamic>>> collections,

@@ -57,37 +57,46 @@ class NegativeEmotionsModel {
   List<Widget> tabBodies = [];
 
   Future<List<AudioCardModel>?> _audioAssets(String tab) async {
-    var collection = await FirebaseFirestore.instance.collection('Audio').get();
-    final audios = <AudioCardModel>[];
-    final Directory appDocDir = await getApplicationDocumentsDirectory();
-    final String appDocPath = appDocDir.path;
-    for (var item in collection.docs) {
-      final audio = Audio.fromJson(item.data());
-      String filePath = appDocPath +
-          '/' +
-          '${audio.folder}/${audio.fileName}.${audio.format}';
-      if(NegativeEmotionTabs.dataSource == DataSource.Remote) {
-        filePath = audio.url;
+    try {
+      var collection = await FirebaseFirestore.instance.collection('Audio')
+          .get();
+      final audios = <AudioCardModel>[];
+      final Directory appDocDir = await getApplicationDocumentsDirectory();
+      final String appDocPath = appDocDir.path;
+      for (var item in collection.docs) {
+        final audio = Audio.fromJson(item.data());
+        String filePath = appDocPath +
+            '/' +
+            '${audio.folder}/${audio.fileName}.${audio.format}';
+        if (NegativeEmotionTabs.dataSourceIsRemote()) {
+          filePath = audio.url;
+        }
+        if (audio.tab == tab) audios.add(AudioCardModel(audio.name, filePath));
       }
-      if (audio.tab == tab) audios.add(AudioCardModel(audio.name, filePath));
+      return audios;
+    }catch (_) {
+      return [];
     }
-    return audios;
   }
 
   Future<List<SelectButtonWidget>?> _funButtons(String tab) async {
-    var collection = await FirebaseFirestore.instance
-        .collection('Text_Recommendation')
-        .get();
-    final buttons = <SelectButtonWidget>[];
-    for (var item in collection.docs) {
-      if (item.data()['tab'] == tab)
-        buttons.add(SelectButtonWidget(
-          title: item.data()['title'],
-          content: item.data()['content'],
-          height: double.parse(item.data()['height'].toString()) ?? 160,
-        ));
+    try {
+      var collection = await FirebaseFirestore.instance
+          .collection('Text_Recommendation')
+          .get();
+      final buttons = <SelectButtonWidget>[];
+      for (var item in collection.docs) {
+        if (item.data()['tab'] == tab)
+          buttons.add(SelectButtonWidget(
+            title: item.data()['title'],
+            content: item.data()['content'],
+            height: double.parse(item.data()['height'].toString()) ?? 160,
+          ));
+      }
+      return buttons;
+    } catch (_) {
+      return [];
     }
-    return buttons;
   }
 
   Future<List<Widget>> getTabBodies() async {

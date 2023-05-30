@@ -175,7 +175,7 @@ class UserRepo {
 
   // some checks
   bool checkActualTariff (TariffModel currentTariff) {
-    if(currentTariff.name != 'Базовый') {
+    if(currentTariff.name != TariffModel.BASE_TARIFF.name) {
       if(currentTariff.endDate.year < DateTime.now().year){
         return false;
       }

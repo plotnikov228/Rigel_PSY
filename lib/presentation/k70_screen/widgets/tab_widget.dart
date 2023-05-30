@@ -30,7 +30,7 @@ class TabWidget extends StatelessWidget {
   final double height;
   final bool? enableScroll;
 
-  const TabWidget(
+   TabWidget(
       {Key? key,
       required this.tab,
       required this.controller,
@@ -40,15 +40,10 @@ class TabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    bool getDataFromRemote = true;
-    if(NegativeEmotionTabs.dataSource != DataSource.Remote) {
-      getDataFromRemote = false;
-    }
-
     Future<List<Duration?>> _durations () async {
       final List<Duration?> list = [];
       for (var item in (await tab.audioAssets())!){
-        if(getDataFromRemote) {
+        if(NegativeEmotionTabs.dataSourceIsRemote()) {
           list.add(await controller.audioInstance.setUrl(item.audioAsset, initialPosition: Duration.zero));
         } else
         list.add(await controller.audioInstance.setAudioSource(AudioSource.file(item.audioAsset), initialPosition: Duration.zero));
@@ -71,7 +66,7 @@ class TabWidget extends StatelessWidget {
                 maxDuration: dur[i]!,
             playFun: (val) async {
 
-              if(getDataFromRemote) {
+              if(NegativeEmotionTabs.dataSourceIsRemote()) {
                 await controller.audioInstance.setUrl((await tab.audioAssets())![i].audioAsset, initialPosition: val);
               } else
                 await controller.audioInstance.setAudioSource(AudioSource.file((await tab.audioAssets())![i].audioAsset), initialPosition: val);
@@ -118,7 +113,7 @@ class TabWidget extends StatelessWidget {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  getDataFromRemote ? SvgPicture.network(
+                                  NegativeEmotionTabs.dataSourceIsRemote() ? SvgPicture.network(
                                     tab.titleImage() ?? '',
                                     height: getVerticalSize(100),
                                     placeholderBuilder: (context) {

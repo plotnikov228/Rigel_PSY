@@ -14,13 +14,7 @@ class K17Repo {
     var e = await HiveDB.getBox(_eventTag);
     TariffModel? value;
     if (e.isEmpty) {
-      value = TariffModel(
-        name: 'Базовый',
-        endDate: DateTime(2024, 12, 24),
-        description: 'Ограниченный доступ к рекомендациям, статистике и аудио',
-        cost: 0,
-        advantages: <String>[],
-      );
+      value = TariffModel.BASE_TARIFF;
       await updateTariff(value);
     }
     else

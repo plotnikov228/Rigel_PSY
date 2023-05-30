@@ -23,12 +23,12 @@ class K2AuthController extends GetxController {
           CurrentUser.user.number = user.number!;
           CurrentUser.user.currentTariff = user.currentTariff!;
           CurrentUser.user.registrationDate = user.registrationDate;
-          await CurrentUser.repo.setLogin(user.login!)
-            ..setNumber(user.number!)
-            ..setRegistrationDate(user.registrationDate)
-            ..setTariff(user.currentTariff!)
-            ..setGender(user.male!)
-            ..setOld(user.old!);
+          await CurrentUser.repo.setLogin(user.login!);
+          await CurrentUser.repo.setNumber(user.number!);
+          await CurrentUser.repo.setRegistrationDate(user.registrationDate);
+          await CurrentUser.repo.setTariff(user.currentTariff!);
+          await CurrentUser.repo.setGender(user.male!);
+          await CurrentUser.repo.setOld(user.old!);
         } else {
           status = AuthStatus.failed;
         }
