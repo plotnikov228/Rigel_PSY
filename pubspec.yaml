@@ -34,7 +34,7 @@ dependencies:
   audio_session: ^0.1.13
   shared_preferences: ^2.1.0
   pdf:
-  printing:
+  printing: ^5.11.0
   record: ^4.4.4
   firebase_messaging: ^14.4.1
   firebase_analytics: ^10.2.1
