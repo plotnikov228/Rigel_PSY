@@ -13,7 +13,9 @@
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Rigel_PSY_психология</string>
+    <string>Rigel PSY психология</string>
+    <key>CFBundleIdentifier</key>
+        <string>com.listenmebabysapplication.app</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
