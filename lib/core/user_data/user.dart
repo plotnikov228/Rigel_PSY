@@ -3,7 +3,6 @@ import 'package:listenmebaby71_s_application17/core/user_data/user_repo.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
-import '../../presentation/k17_screen/repository.dart';
 import '../models/user_model.dart';
 
 class CurrentUser extends UserModel {

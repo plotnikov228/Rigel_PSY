@@ -3,7 +3,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:listenmebaby71_s_application17/core/db/hive_db.dart';
-import 'package:listenmebaby71_s_application17/core/services/firebase_cloud_storage.dart';
 import 'package:listenmebaby71_s_application17/core/services/workmanager_service.dart';
 import 'package:listenmebaby71_s_application17/core/user_data/user.dart';
 import 'package:listenmebaby71_s_application17/routes/app_routes.dart';
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
       ),
       title: 'Rigel PSY',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.k1Screen,
+      initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.routes,
     );
   }

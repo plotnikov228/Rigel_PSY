@@ -48,7 +48,7 @@ mainAxisAlignment: MainAxisAlignment.end,          children: [
               ),
               text: "Перейти на тариф стандарт".toUpperCase(),
               onTap: () async {
-                Navigator.pushNamed(context, AppRoutes.k14Screen,
+                Navigator.pushNamed(context, AppRoutes.buySubscription,
                     arguments: TariffModel.STANDARD_TARIFF);
               },
               fontStyle: ButtonFontStyle.SFProDisplayRegular12Cyan700,
@@ -69,8 +69,8 @@ mainAxisAlignment: MainAxisAlignment.end,          children: [
               text: "к  бесплатным рекомендациям".toUpperCase(),
               onTap: () async {
                 if (onSecondButtonTap == null) {
-                  Navigator.pushNamed(context, AppRoutes.k70Screen);
-                  AppRoutes.currentRoute = AppRoutes.k70Screen;
+                  Navigator.pushNamed(context, AppRoutes.recommendations);
+                  AppRoutes.currentRoute = AppRoutes.recommendations;
                 } else onSecondButtonTap!();
               },
               alignment: Alignment.center,

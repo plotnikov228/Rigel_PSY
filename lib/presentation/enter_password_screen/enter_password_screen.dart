@@ -39,6 +39,6 @@ class EnterPasswordScreen extends GetWidget<EnterPasswordController> {
   }
 
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.k6Screen);
+    Navigator.pushNamed(context, AppRoutes.settings);
   }
 }

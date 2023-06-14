@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.canardoux:flutter_sound_core:8.5.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c3926b076257b790c4da5b4ca3b24a18/transformed/jetified-flutter_sound_core-8.5.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c3926b076257b790c4da5b4ca3b24a18/transformed/jetified-flutter_sound_core-8.5.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c3926b076257b790c4da5b4ca3b24a18/transformed/jetified-flutter_sound_core-8.5.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c0654dae92ebdb2d89c8f37f0df767df/transformed/jetified-flutter_sound_core-8.5.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c0654dae92ebdb2d89c8f37f0df767df/transformed/jetified-flutter_sound_core-8.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c0654dae92ebdb2d89c8f37f0df767df/transformed/jetified-flutter_sound_core-8.5.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

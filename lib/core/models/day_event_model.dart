@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
-import '../../presentation/k32_screen/k32_model.dart';
+import '../../presentation/main/path/what_body_parts_screen/k32_model.dart';
 import 'body_parts_model.dart';
 
 part 'generated/day_event_model.g.dart';

@@ -48,7 +48,7 @@ class CustomPopButton extends StatelessWidget {
                         textAlign:
                         TextAlign
                             .left,
-                        style: style == null ? AppStyle.txtSFProDisplayLight10 : style)) // or txtSFProDisplayLight10Gray800
+                        style: style ?? AppStyle.txtSFProDisplayLight10)) // or txtSFProDisplayLight10Gray800
           ],
         ),
       ),

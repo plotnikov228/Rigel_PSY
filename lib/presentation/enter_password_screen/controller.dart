@@ -15,7 +15,7 @@ class EnterPasswordController extends GetxController {
   update();
   }, textEditingController: passController, password: '', onSubmit: (text, _) {
   if(text == CurrentUser.user.password){
-  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.k20Screen, (route) => false);
+  Navigator.pushNamedAndRemoveUntil(context, AppRoutes.main, (route) => false);
   } else {
     passFieldColor = Colors.red;
     update();

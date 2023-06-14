@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
+
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
 
 class CustomBottomBar extends StatelessWidget {
@@ -45,40 +44,40 @@ class CustomBottomBar extends StatelessWidget {
     void getCurrentPage(int currentRoute) {
       switch (currentRoute) {
         case 0:
-          if(ModalRoute.of(context)!.settings.name != AppRoutes.k70Screen) {
-            AppRoutes.currentRoute = AppRoutes.k70Screen;
+          if(ModalRoute.of(context)!.settings.name != AppRoutes.recommendations) {
+            AppRoutes.currentRoute = AppRoutes.recommendations;
 
-            Navigator.pushNamed(context, AppRoutes.k70Screen);
+            Navigator.pushNamed(context, AppRoutes.recommendations);
           }
           break;
         case 1:
-          if(ModalRoute.of(context)!.settings.name != AppRoutes.k49Screen) {
-            AppRoutes.currentRoute = AppRoutes.k49Screen;
-            Navigator.pushNamed(context, AppRoutes.k49Screen);
+          if(ModalRoute.of(context)!.settings.name != AppRoutes.records) {
+            AppRoutes.currentRoute = AppRoutes.records;
+            Navigator.pushNamed(context, AppRoutes.records);
           }
           break;
         case 2:
-          if(ModalRoute.of(context)!.settings.name != AppRoutes.k20Screen) {
-            AppRoutes.currentRoute = AppRoutes.k20Screen;
-            Navigator.pushNamed(context, AppRoutes.k20Screen);
+          if(ModalRoute.of(context)!.settings.name != AppRoutes.main) {
+            AppRoutes.currentRoute = AppRoutes.main;
+            Navigator.pushNamed(context, AppRoutes.main);
           }
           break;
           case 3:
-            if(ModalRoute.of(context)!.settings.name != AppRoutes.k61Screen) {
-            AppRoutes.currentRoute = AppRoutes.k61Screen; // афики
-            Navigator.pushNamed(context, AppRoutes.k61Screen);
+            if(ModalRoute.of(context)!.settings.name != AppRoutes.charts) {
+            AppRoutes.currentRoute = AppRoutes.charts;
+            Navigator.pushNamed(context, AppRoutes.charts);
           }
           break;
         case 4:
-          if(ModalRoute.of(context)!.settings.name != AppRoutes.k6Screen) {
-            AppRoutes.currentRoute = AppRoutes.k6Screen;
-            Navigator.pushNamed(context, AppRoutes.k6Screen);
+          if(ModalRoute.of(context)!.settings.name != AppRoutes.settings) {
+            AppRoutes.currentRoute = AppRoutes.settings;
+            Navigator.pushNamed(context, AppRoutes.settings);
           }
           break;
         default:
-          if(ModalRoute.of(context)!.settings.name != AppRoutes.k20Screen) {
-            AppRoutes.currentRoute = AppRoutes.k20Screen;
-            Navigator.pushNamed(context, AppRoutes.k20Screen);
+          if(ModalRoute.of(context)!.settings.name != AppRoutes.main) {
+            AppRoutes.currentRoute = AppRoutes.main;
+            Navigator.pushNamed(context, AppRoutes.main);
           }
           break;
       }
@@ -86,19 +85,19 @@ class CustomBottomBar extends StatelessWidget {
 
     void getCurrentIndex(String? currentRoute) {
       switch (currentRoute) {
-        case AppRoutes.k70Screen:
+        case AppRoutes.recommendations:
           selectedIndex = 0;
           break;
-        case AppRoutes.k49Screen:
+        case AppRoutes.records:
           selectedIndex = 1;
           break;
-        case AppRoutes.k20Screen:
+        case AppRoutes.main:
           selectedIndex = 2;
           break;
-        case AppRoutes.k61Screen:
+        case AppRoutes.charts:
           selectedIndex = 3;
           break;
-        case AppRoutes.k6Screen:
+        case AppRoutes.settings:
           selectedIndex = 4;
           break;
         default:

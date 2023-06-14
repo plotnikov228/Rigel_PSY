@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentation/k62_screen/controller.dart';
+import '../../../presentation/charts/charts_calendar/controller.dart';
 import '../../../routes/app_routes.dart';
 import '../day_event_model.dart';
 import 'day_model.dart';
@@ -45,10 +45,10 @@ class MonthModel {
       }
       void _onTap() {
         if (dayEventModel != null && type == CalendarType.Change) {
-          Navigator.pushNamed(context, AppRoutes.k52Screen,
+          Navigator.pushNamed(context, AppRoutes.calendar_search,
               arguments: dayEventModel);
         } else if (type == CalendarType.Add) {
-          Navigator.pushNamed(context, AppRoutes.k54Screen,
+          Navigator.pushNamed(context, AppRoutes.calendar_add,
               arguments:
                   DateTime(currentMonth.year, currentMonth.month, i + 1));
         } else

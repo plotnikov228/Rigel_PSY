@@ -19,12 +19,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1445973749/android.just_audio.iml" filepath="$PROJECT_DIR$/.idea/modules/1445973749/android.just_audio.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1637342026/android.path_provider_android.iml" filepath="$PROJECT_DIR$/.idea/modules/-1637342026/android.path_provider_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/614368193/android.permission_handler_android.iml" filepath="$PROJECT_DIR$/.idea/modules/614368193/android.permission_handler_android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1835360174/android.printing.iml" filepath="$PROJECT_DIR$/.idea/modules/1835360174/android.printing.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-141320853/android.record.iml" filepath="$PROJECT_DIR$/.idea/modules/-141320853/android.record.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1316053279/android.shared_preferences_android.iml" filepath="$PROJECT_DIR$/.idea/modules/-1316053279/android.shared_preferences_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1160339682/android.workmanager.iml" filepath="$PROJECT_DIR$/.idea/modules/1160339682/android.workmanager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1695740511/com.tekartik.sqflite.android.sqflite.iml" filepath="$PROJECT_DIR$/.idea/modules/-1695740511/com.tekartik.sqflite.android.sqflite.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1199853951/io.flutter.plugins.urllauncher.android.url_launcher_android.iml" filepath="$PROJECT_DIR$/.idea/modules/-1199853951/io.flutter.plugins.urllauncher.android.url_launcher_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1165804908/net.nfet.flutter.printing.android.printing.iml" filepath="$PROJECT_DIR$/.idea/modules/1165804908/net.nfet.flutter.printing.android.printing.iml" />
     </modules>
   </component>
 </project>

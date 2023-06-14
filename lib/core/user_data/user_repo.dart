@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:listenmebaby71_s_application17/core/user_data/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../presentation/k17_screen/repository.dart';
+import '../../presentation/settings/settings_tariff_activated_screen/repository.dart';
 import '../models/tariff_model.dart';
 
 class UserRepo {
