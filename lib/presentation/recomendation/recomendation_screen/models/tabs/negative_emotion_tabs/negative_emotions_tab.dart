@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/models/audio/audio_card_model.dart';
 import '../../../widgets/select_botton_widget.dart';
-import '../../audio_card_model.dart';
 
 abstract class NegativeEmotionsModelTab {
   String?  titleText();

@@ -5,20 +5,16 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
 
-import '../../../../../core/utils/image_constant.dart';
-import '../../../../../core/utils/size_utils.dart';
-import '../../../../../theme/app_decoration.dart';
-import '../../../../../theme/app_style.dart';
-import '../../../../../widgets/custom_icon_button.dart';
-import '../../../../../widgets/custom_image_view.dart';
-import '../controller.dart';
+import '../../widgets/custom_icon_button.dart';
+import '../presentation/recomendation/recomendation_screen/controller.dart';
 
 class AudioCardWidget extends StatelessWidget {
   final String text;
   final Duration maxDuration;
   final Function(Duration) onChange;
   final Function? loadFun;
-  final K70Controller controller;
+  final AudioPlayer audioInstance;
+  int currentAudioIndex;
   final Function(Duration duration)? playFun;
   final Function()? stopFun;
   final int index;
@@ -30,7 +26,7 @@ class AudioCardWidget extends StatelessWidget {
       required this.maxDuration,
       this.playFun,
       this.stopFun,
-      this.loadFun, required this.controller, required this.index})
+      this.loadFun, required this.index, required this.audioInstance, required this.currentAudioIndex})
       : super(key: key);
 
   AudioState state = AudioState.Stopped;
@@ -50,15 +46,15 @@ class AudioCardWidget extends StatelessWidget {
 
     late Timer _timer;
 
-    controller.audioInstance.playerStateStream.listen((playerState) {
+    audioInstance.playerStateStream.listen((playerState) {
       final processingState = playerState.processingState;
 
-      if(controller.audioInstance.playing && controller.currentAudioIndex != index){
+      if(audioInstance.playing && currentAudioIndex != index){
         state = AudioState.Stopped;
         _timer.cancel();
       } if (processingState == ProcessingState.completed) { // completed
-        controller.audioInstance.seek(Duration.zero);
-        controller.audioInstance.pause();
+        audioInstance.seek(Duration.zero);
+        audioInstance.pause();
       }
     });
     return GetBuilder(
@@ -106,17 +102,17 @@ class AudioCardWidget extends StatelessWidget {
                           padding: getPadding(left: 8),
                           child: InkWell(
                             onTap: (){
-                              if(controller.currentAudioIndex != index && state == AudioState.Playing) {
+                              if(currentAudioIndex != index && state == AudioState.Playing) {
                                 state = AudioState.Stopped;
                               }
-                              controller.currentAudioIndex = index;
+                              currentAudioIndex = index;
                               if(state == AudioState.Stopped){
                                 state = AudioState.Playing;
                                 playFun!(duration);
                                 _timer = Timer.periodic(Duration(seconds: 1), (timer) {
                                   duration = Duration(seconds: duration.inSeconds + 1);
                                   if(duration.inSeconds.toDouble() >= maxDuration.inSeconds.toDouble()){
-                                    controller.currentAudioIndex = index;
+                                    currentAudioIndex = index;
                                     _timer.cancel();
                                     stopFun!();
                                     state = AudioState.Stopped;
@@ -126,7 +122,7 @@ class AudioCardWidget extends StatelessWidget {
                                 });
 
                               } else {
-                                controller.currentAudioIndex = index;
+                                currentAudioIndex = index;
                                 _timer.cancel();
                                 stopFun!();
                                 state = AudioState.Stopped;
@@ -137,7 +133,7 @@ class AudioCardWidget extends StatelessWidget {
                             child: CustomImageView(
                               height: getSize(30),
                               width: getSize(30),
-                              svgPath: (state == AudioState.Stopped || controller.currentAudioIndex != index) ? ImageConstant.buttonStart : ImageConstant.imgVolume,
+                              svgPath: (state == AudioState.Stopped || currentAudioIndex != index) ? ImageConstant.buttonStart : ImageConstant.imgVolume,
                             ),
                           ),
                         ),
@@ -161,7 +157,6 @@ class AudioCardWidget extends StatelessWidget {
                                   onChanged: (double value) {
                                       duration = Duration(seconds: value.toInt());
                                       onChange(duration);
-                                      controller.update();
                                   },
                                 ),
                               )

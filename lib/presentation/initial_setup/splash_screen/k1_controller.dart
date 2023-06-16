@@ -15,6 +15,7 @@ import '../../../core/services/negative_emotion_tabs.dart';
 import '../../../core/services/firebase_cloud_storage.dart';
 
 class K1Controller extends GetxController {
+
   bool loading = false;
   bool wasInit = false;
   int secondsToNewPage = 2;

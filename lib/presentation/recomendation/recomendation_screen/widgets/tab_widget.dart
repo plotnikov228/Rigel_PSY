@@ -16,7 +16,7 @@ import '../../../../core/services/datasource_service.dart';
 import '../controller.dart';
 import '../models/audio_model.dart';
 import '../models/tabs/negative_emotion_tabs/negative_emotions_tab.dart';
-import 'audio_card_widget.dart';
+import '../../../../widgets/audio_card_widget.dart';
 import 'package:audio_session/audio_session.dart';
 
 import '../../../../../widgets/go_to_new_tariff_widget.dart';
@@ -61,7 +61,10 @@ class TabWidget extends StatelessWidget {
           list.add(AudioCardWidget(
             index: i,
                 text: (await tab.audioAssets())![i].title,
-                onChange: (Duration duration) => controller.audioInstance.seek(duration),
+                onChange: (Duration duration) {
+                  controller.audioInstance.seek(duration);
+                  controller.update();
+                },
                 maxDuration: dur[i]!,
             playFun: (val) async {
 
@@ -75,7 +78,7 @@ class TabWidget extends StatelessWidget {
             stopFun: () async {
               await controller.audioInstance.pause();
             },
-            loadFun: () async {}, controller: controller,
+            loadFun: () async {}, audioInstance: controller.audioInstance, currentAudioIndex: controller.currentAudioIndex!,
             ));
 
         }

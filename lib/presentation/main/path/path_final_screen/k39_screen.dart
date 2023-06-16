@@ -88,7 +88,7 @@ class K39Screen extends GetWidget {
                           padding: getPadding(
                             top: 30,
                           ),
-                          child: ScreenBodyWidget(isNegative: dayEventModel.emotionInDayEvent == EmotionInDayEvent.NEGATIVE,)
+                          child: ScreenBodyWidget(isNegative: dayEventModel.emotionInDayEvent == EmotionInDayEvent.NEGATIVE, dayEventModel: dayEventModel,)
                         ),
                         SizedBox(
                           height: getVerticalSize(140),

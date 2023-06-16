@@ -41,6 +41,17 @@ class DayEventModel implements Comparable<DayEventModel>{
 
   Map<String, dynamic> toJson() => _$DayEventModelToJson(this);
 
+  String getEmotionType () {
+    switch (emotionInDayEvent) {
+      case EmotionInDayEvent.NEGATIVE:
+        return 'Негативные';
+      case EmotionInDayEvent.POSITIVE:
+        return 'Позитивные';
+      default:
+        return 'Нейтральны';
+    }
+  }
+
   static DayEventModel defaultModel = DayEventModel(
       howDoYouFeel: 6,
       date: DateTime.now(),

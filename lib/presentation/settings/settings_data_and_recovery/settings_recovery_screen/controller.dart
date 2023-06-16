@@ -4,10 +4,11 @@ import 'widgets/card_recovery_button_widget.dart';
 
 class RecoveryController extends GetxController {
 
-  final List<RecoveryData> recoveryDataList = [];
-
   Future<List<RecoveryData>> getRecoveryData () async {
     return [];
+  }
+
+  Future setUpRecoveryData (RecoveryData data) async {
   }
 
 }

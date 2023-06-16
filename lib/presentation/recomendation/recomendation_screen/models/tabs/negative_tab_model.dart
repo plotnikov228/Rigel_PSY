@@ -1,5 +1,5 @@
+import '../../../../../core/models/audio/audio_card_model.dart';
 import '../../widgets/select_botton_widget.dart';
-import '../audio_card_model.dart';
 import 'negative_emotion_tabs/negative_emotions_tab.dart';
 
 class NegativeTab extends NegativeEmotionsModelTab {

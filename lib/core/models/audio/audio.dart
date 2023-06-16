@@ -5,8 +5,9 @@ class Audio {
   final String format;
   final String tab;
   final String url;
+  final List<String> emotions;
 
-  Audio(this.fileName, this.folder, this.name, this.format, this.tab, this.url);
+  Audio(this.fileName, this.folder, this.name, this.format, this.tab, this.url, this.emotions);
 
   factory Audio.fromJson(Map<String, dynamic> json) {
     return Audio(
@@ -16,6 +17,7 @@ class Audio {
         json['format'] as String,
         json['tab'] as String,
       json['url'] as String,
+      (json['emotions'] as String).split(', ')
 
     );
   }
@@ -28,6 +30,7 @@ class Audio {
     json['format'] = this.format;
     json['tab'] = this.tab;
     json['url'] = this.url;
+    json['emotions'] = this.emotions;
     return json;
   }
 }

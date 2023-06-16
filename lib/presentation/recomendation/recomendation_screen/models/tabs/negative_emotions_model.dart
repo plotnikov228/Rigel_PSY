@@ -4,15 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../../../core/models/audio.dart';
+import '../../../../../core/models/audio/audio.dart';
+import '../../../../../core/models/audio/audio_card_model.dart';
 import '../../../../../core/services/datasource_service.dart';
 import '../../../../../core/services/negative_emotion_tabs.dart';
 import '../../controller.dart';
 import '../../widgets/select_botton_widget.dart';
 import '../../widgets/tab_widget.dart';
-import '../audio_card_model.dart';
 import 'negative_tab_model.dart';
-import '../../../../../core/services/negative_emotion_tabs.dart';
 
 class NegativeEmotionsModel {
   final K70Controller controller;

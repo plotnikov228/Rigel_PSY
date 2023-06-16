@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../../../core/db/hive_db.dart';
-import '../../../core/models/audio.dart';
+import '../../../core/models/audio/audio.dart';
 
 class K1Repo {
 

@@ -3,18 +3,22 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
 
+import '../../../../../core/models/day_event_model.dart';
 import '../../../../../core/services/datasource_service.dart';
 import '../../../../../core/services/negative_emotion_tabs.dart';
+import '../../../../../core/user_data/user.dart';
 import '../path_to_new_screen_model.dart';
+import 'exercise_content/exercise_content_widget.dart';
 import 'listglobe_item_widget.dart';
 
 class ScreenBodyWidget extends StatelessWidget {
   final bool isNegative;
-  const ScreenBodyWidget({Key? key, required this.isNegative}) : super(key: key);
+  final DayEventModel dayEventModel;
+  const ScreenBodyWidget({Key? key, required this.isNegative, required this.dayEventModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return isNegative ? ifIsNegative() : ifNotNegative();
+    return CurrentUser.tariffIsStandard() ? ExerciseContentWidget(dayEvent: dayEventModel,) : isNegative ? ifIsNegative() : ifNotNegative();
   }
 
   Widget ifIsNegative () {
