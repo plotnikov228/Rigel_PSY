@@ -5,7 +5,8 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
-import '../../settings/settings_profile_screen/text_field_formatter.dart';
+import '../../../settings/settings_profile_screen/text_field_formatter.dart';
+import '../widgets/services_button.dart';
 import 'k2_controller.dart';
 import 'package:listenmebaby71_s_application17/widgets/custom_button.dart';
 import 'package:listenmebaby71_s_application17/widgets/custom_checkbox.dart';
@@ -17,6 +18,9 @@ class K2Screen extends GetWidget<K2Controller> {
   TextEditingController group889Controller = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+
+  TextEditingController passwordRepeatController = TextEditingController();
+
 
   bool checkbox = false;
 
@@ -140,11 +144,19 @@ class K2Screen extends GetWidget<K2Controller> {
                                               textAlign: TextAlign.left,
                                               style: AppStyle
                                                   .txtSFProDisplayLight16)),
+                                      Padding(
+                                          padding: getPadding(top: 10),
+                                          child: Text("Пароль должен содержать 8 символов и по крайне мере, одну цифру и один символ, такой как !·\$%&?",
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.left,
+                                              style: AppStyle
+                                                  .txtSFProDisplayLight12)),
                                       CustomTextFormField(
                                           focusNode: FocusNode(),
                                           controller: passwordController,
-                                          hintText: "Ваш пароль",
+                                          hintText: "",
                                           margin: getMargin(top: 14),
+                                          isObscureText: true,
                                           variant: TextFormFieldVariant
                                               .UnderLineWhiteA700,
                                           fontStyle: TextFormFieldFontStyle
@@ -167,6 +179,33 @@ class K2Screen extends GetWidget<K2Controller> {
                                           },
                                           textInputAction:
                                           TextInputAction.done),
+                                      Padding(
+                                          padding: getPadding(top: 38),
+                                          child: Text("Подтвердждение пароля",
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.left,
+                                              style: AppStyle
+                                                  .txtSFProDisplayLight16)),
+                                      CustomTextFormField(
+                                          focusNode: FocusNode(),
+                                          controller: passwordRepeatController,
+                                          hintText: "",
+                                          isObscureText: true,
+                                          margin: getMargin(top: 14),
+                                          variant: TextFormFieldVariant
+                                              .UnderLineWhiteA700,
+                                          fontStyle: TextFormFieldFontStyle
+                                              .SFProDisplayRegular14,
+                                          maxLength: 26,
+                                          counterText: '',
+                                          validator: (text) {
+                                            if(text!.trim() == "") return "Заполните поле";
+                                            else if (text != passwordController.text) {
+                                              return 'Пароли должны совпадать';
+                                            }
+                                          },
+                                          textInputAction:
+                                          TextInputAction.done),
                                       GetBuilder(
                                         builder: (K2Controller controller) => Column(
                                           children: [
@@ -183,6 +222,15 @@ class K2Screen extends GetWidget<K2Controller> {
                                                   controller.update();
                                                 }),
 
+                                        Padding(padding: getPadding(top: 26, bottom: 26),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ServicesButton(svgIcon: ImageConstant.appleSVG, serviceName: 'Apple', onTap: () async => await controller.authWithApple(context)),
+                                            ServicesButton(svgIcon: ImageConstant.googleSVG, serviceName: 'Google', onTap: () async => await controller.authWithGoogle(context)),
+                                          ],
+                                        ),
+                                        ),
                                         Align(
                                             alignment: Alignment.centerRight,
                                             child: Padding(
@@ -215,12 +263,37 @@ class K2Screen extends GetWidget<K2Controller> {
                                                     color: dividerColor2))),],
                                 ),
                                       ),
+                                      Padding(
+                                        padding: getPadding(top: 42),
+                                        child: InkWell(
+                                          onTap: () => Navigator.pushNamed(context, AppRoutes.signIn),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text("У меня уже есть аккаунт ",
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.left,
+                                                  style: AppStyle
+                                                      .txtSFProDisplayLight16DeepPurple),
+                                              CustomImageView(
+                                                  svgPath: ImageConstant
+                                                      .imgVector46,
+                                                  height:
+                                                  getVerticalSize(
+                                                      8),
+                                                  width:
+                                                  getHorizontalSize(
+                                                      4),),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                       CustomButton(
                                           height: getVerticalSize(32),
                                           width: getHorizontalSize(178),
                                           text: "Далее".toUpperCase(),
                                           margin:
-                                              getMargin(top: 89, bottom: 177),
+                                              getMargin(top: 42, bottom: 177),
                                           variant: ButtonVariant
                                               .OutlineBluegray60014,
                                           onTap: () => onTaptf(context, key),

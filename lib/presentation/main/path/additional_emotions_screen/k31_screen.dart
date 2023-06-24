@@ -14,12 +14,12 @@ class K31Screen extends GetWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(K31Controller());
-    final data =
-    (ModalRoute.of(context)?.settings.arguments ?? {
-    'emotionCategory' : 'Нейтральные',
-    'dayEventModel' : [],
-    'someEmotions' : []
-    }) as Map<String, dynamic>;
+      final data =
+      (ModalRoute.of(context)?.settings.arguments ?? {
+      'emotionCategory' : 'Нейтральные',
+      'dayEventModel' : [],
+      'someEmotions' : []
+      }) as Map<String, dynamic>;
     final dayEventModel = (data['dayEventModel'] as DayEventModel);
     controller.emotions = dayEventModel.whatEmotion!;
     controller.title = (data['emotionCategory'] as String);

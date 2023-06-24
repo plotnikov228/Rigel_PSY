@@ -15,6 +15,12 @@ class ImageConstant {
   static String imgLocationGray80063x81 =
       'assets/images/img_location_gray_800_63x81.svg';
 
+  static String googleSVG =
+      'assets/images/googleSVG';
+
+  static String appleSVG =
+      'assets/images/appleSVG';
+
   static String imgPill =
       'assets/images/pill.svg';
 

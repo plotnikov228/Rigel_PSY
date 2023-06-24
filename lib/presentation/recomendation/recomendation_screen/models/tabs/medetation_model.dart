@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import '../../../../../core/models/audio/audio_card_model.dart';
 import '../../../../../core/services/datasource_service.dart';
 import '../../widgets/select_botton_widget.dart';
@@ -13,18 +14,24 @@ class MeditationModel extends NegativeEmotionsModelTab{
 
   Future<List<AudioCardModel>?> audioAssets () async {
 
-    var collection = await FirebaseFirestore.instance.collection('Audio').get();
+    var collection = await FirebaseFirestore.instance.collection('Audio').where('tab', isEqualTo:'meditation').get();
     final audios = <AudioCardModel>[];
     final Directory appDocDir = await getApplicationDocumentsDirectory();
     final String appDocPath = appDocDir.path;
     for (var item in collection.docs) {
-      final audio = Audio.fromJson(item.data());
-       String filePath = appDocPath + '/' + '${audio.folder}/${audio.fileName}.${audio.format}';
-      if(DataSourceService.dataSourceIsRemote()) {
-        filePath = audio.url;
+      try {
+        final audio = Audio.fromJson(item.data());
+        String filePath = appDocPath + '/' + '${audio.folder}/${audio.fileName}.${audio.format}';
+        if(DataSourceService.dataSourceIsRemote()) {
+          filePath = audio.url ?? await FirebaseStorage.instance.ref(audio.folder + '/' + audio.fileName + '.' + audio.format).getDownloadURL();
+        }
+        if(audio.tab == 'meditation')
+          audios.add(AudioCardModel(audio.name, filePath));
+      }catch (_) {
+        print (_);
+
       }
-      if(audio.tab == 'meditation')
-        audios.add(AudioCardModel(audio.name, filePath));
+
 
     }
     return audios;

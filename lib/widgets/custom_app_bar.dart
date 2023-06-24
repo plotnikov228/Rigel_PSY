@@ -6,14 +6,15 @@ import 'custom_pop_button.dart';
 
 class CustomAppBar extends StatelessWidget {
   final Widget widget;
-  const CustomAppBar({Key? key, required this.widget}) : super(key: key);
+  final EdgeInsetsGeometry? margin;
+  const CustomAppBar({Key? key, required this.widget, this.margin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         height: getVerticalSize(12),
         width: getHorizontalSize(328),
-        margin: getMargin(top: 39),
+        margin: margin ?? getMargin(top: 39),
         child: Stack(
             alignment: Alignment.bottomCenter,
             children: [

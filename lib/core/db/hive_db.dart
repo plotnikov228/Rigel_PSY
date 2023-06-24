@@ -12,12 +12,12 @@ class HiveDB {
   static Future initDB() async {
     if (_dir == null || _pathDataForTransfer == null) {
       _dir = await path.getApplicationDocumentsDirectory();
-      _pathDataForTransfer = '$_dir/dataForTransfer.json';
+      _pathDataForTransfer = '${_dir!.path}/dataForTransfer.json';
     }
     Hive.init(_dir!.path);
   }
 
-  static Future setHiveDBInFile() async {
+  static Future<File> setHiveDBInFile() async {
     String dataForTransfer = '';
     for (var item in HiveDBTags.allTagsForTransfer) {
       final boxData = await getBox(item);
@@ -28,15 +28,19 @@ class HiveDB {
     }
     dataForTransfer = '{$dataForTransfer}';
     print(dataForTransfer);
-    await _createFileToTransfer(jsonDecode(dataForTransfer));
+    return await _createFileToTransfer(jsonDecode(dataForTransfer));
   }
 
-  static Future _createFileToTransfer(Map content) async {
+  static Future<File> _createFileToTransfer(Map content) async {
     final file = File(_pathDataForTransfer!);
-    if (!(await file.exists())) {
+
+    /*if (!(await file.exists())) {
+      await file.
       await file.create();
-    }
-    await file.writeAsString(jsonEncode(content));
+    }*/
+    await file.writeAsString(jsonEncode(content)).then((value) async => await file.create(recursive: true));
+
+    return file;
   }
 
   static Future getHiveDBFromFile(String path) async {

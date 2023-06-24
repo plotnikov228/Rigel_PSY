@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "408583851820-a6k8gsg8e83ord8d3orcu2gm4nhms5c2.apps.googleusercontent.com",
+          "client_id": "408583851820-gcrn80s3cu2av4cqm2jhhf67ei007p8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.listenmebabysapplication.app",
+            "certificate_hash": "4ce7651ef56a9844dbe9f186c101b4b5b61a3ef5"
+          }
+        },
+        {
+          "client_id": "408583851820-koct3sn1t83i0va28krd9j26ktljgjpt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +37,13 @@
             {
               "client_id": "408583851820-a6k8gsg8e83ord8d3orcu2gm4nhms5c2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "408583851820-6lodf34gi09t60jqm3vcfi5l8c80itpk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.listenmebabysapplication.app"
+              }
             }
           ]
         }

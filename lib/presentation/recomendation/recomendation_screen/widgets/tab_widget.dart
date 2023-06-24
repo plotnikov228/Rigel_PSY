@@ -78,7 +78,7 @@ class TabWidget extends StatelessWidget {
             stopFun: () async {
               await controller.audioInstance.pause();
             },
-            loadFun: () async {}, audioInstance: controller.audioInstance, currentAudioIndex: controller.currentAudioIndex!,
+            loadFun: () async {}, audioInstance: controller.audioInstance, currentAudioIndex: controller.currentAudioIndex ?? 0,
             ));
 
         }

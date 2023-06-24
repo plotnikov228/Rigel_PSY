@@ -31,7 +31,7 @@ class K70Controller extends GetxController {
 
   Future initNegativeEmotions () async {
     negativeEmotionsModel = NegativeEmotionsModel(this);
-    negativeEmotionsModel!.tabBodies = await negativeEmotionsModel!.getTabBodies();
+    await negativeEmotionsModel!.getTabBodies().then((value) => negativeEmotionsModel!.tabBodies = value);
     final Directory appDocDir = await getApplicationDocumentsDirectory();
     final String appDocPath = appDocDir.path;
     depressionModel.imageTitle = appDocPath + '/' + 'tabs_images/depression.svg';

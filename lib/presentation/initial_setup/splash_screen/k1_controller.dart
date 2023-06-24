@@ -1,14 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
 import 'package:listenmebaby71_s_application17/core/user_data/user.dart';
 import '../../../core/services/datasource_service.dart';
 import '../../recomendation/recomendation_screen/controller.dart';
-import 'repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/services/negative_emotion_tabs.dart';
@@ -21,11 +20,11 @@ class K1Controller extends GetxController {
   int secondsToNewPage = 2;
 
   Timer timer(BuildContext context) =>
-      Timer(Duration(seconds: secondsToNewPage), () {
-        if (CurrentUser.user.password!.isEmpty &&
-            CurrentUser.user.login!.isEmpty)
+      Timer(Duration(seconds: secondsToNewPage), () async {
+
+        if (FirebaseAuth.instance.currentUser == null)
           Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.signIn, (route) => false);
+              context, AppRoutes.signUp, (route) => false);
         else if (CurrentUser.user.passwordEnable &&
             CurrentUser.user.password!.isNotEmpty) {
           Navigator.pushNamedAndRemoveUntil(
@@ -43,11 +42,12 @@ class K1Controller extends GetxController {
       if (wasInit != true) {
         wasInit = true;
         await someProcess();
-
+        DataSourceService.getDataSourceType();
         await NegativeEmotionTabs.getTabs(context);
 
         final controller = Get.put(K70Controller());
         await controller.initNegativeEmotions();
+        print(DataSourceService.dataSourceIsRemote());
         if (!DataSourceService.dataSourceIsRemote()) {
           var collectionAudio =
               await FirebaseFirestore.instance.collection('Audio').get();
@@ -56,10 +56,7 @@ class K1Controller extends GetxController {
 
           final IMAGE_KEY = 'images_data';
           final AUDIO_KEY = 'audio_data';
-          if ((prefs.getString(IMAGE_KEY) ?? '') !=
-                  collectionImages.docs.toString() ||
-              (prefs.getString(AUDIO_KEY) ?? '') !=
-                  collectionAudio.docs.toString()) {
+
             loading = true;
             update();
             downloadingFiles([collectionAudio, collectionImages], prefs,
@@ -75,11 +72,11 @@ class K1Controller extends GetxController {
             });
           } else {
             loading = false;
+            timer(context);
           }
-        } else
-          timer(context);
       }
     } catch (_) {
+      print('error $_' );
       timer(context);
     }
   }
@@ -96,12 +93,13 @@ class K1Controller extends GetxController {
           var count = 0;
 
           for (var item in collections[i].docs) {
-            final String folder = item['folder'];
-            final String path =
-                item['folder'] + '/' + item['fileName'] + '.' + item['format'];
-            await storage.downloadFile(() {}, () {
+            final String folder = (item['folder'] as String?) ?? 'audio';
+            final String path = folder + '/' + item['fileName'] + '.' + ((item['format'] as String?) ?? 'mp3');
+            await storage.downloadFile(() {
+              print('error downloading in $path' );
+            }, () {
               count++;
-            }, folder, path);
+            }, folder?? 'audio', path);
           }
 
           if (count == collections[i].docs.length) {
@@ -110,7 +108,8 @@ class K1Controller extends GetxController {
         }
       }
     } catch (error) {
-      onError ?? print(error);
+      print(error);
+      onError!();
     }
   }
 

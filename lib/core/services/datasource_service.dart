@@ -13,7 +13,7 @@ class DataSourceService {
 
   static bool dataSourceIsRemote() {
     print(_dataSource);
-    return _dataSource == DataSource.Remote ? true : false;
+    return _dataSource == DataSource.Remote;
   }
 
   static void getDataSourceType() {

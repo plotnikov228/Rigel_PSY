@@ -4,15 +4,15 @@ import 'package:listenmebaby71_s_application17/core/app_export.dart';
 class CustomMessageBox extends StatelessWidget {
   final String title;
   final dynamic content;
-  final double? height;
+  final double height;
   final VoidCallback? onPop;
-
+  final bool canPop;
   const CustomMessageBox(
       {Key? key,
       required this.title,
       required this.content,
       this.height = 150,
-      this.onPop})
+      this.onPop, this.canPop = true})
       : super(key: key);
 
   @override
@@ -44,16 +44,17 @@ class CustomMessageBox extends StatelessWidget {
                             fontFamily: 'SF Pro Display'),
                       ),
                     ),
-                        IconButton(
-                            alignment: Alignment.center,
-                            onPressed: () => onPop != null
-                                ? onPop!()
-                                : Navigator.pop(context),
-                            icon: Icon(
-                              Icons.close,
-                              size: getSize(18),
-                              color: Colors.white,
-                            ))
+                        Visibility(
+                          visible: canPop,
+                          child: IconButton(
+                              alignment: Alignment.center,
+                              onPressed: () => onPop != null ? onPop!() : Navigator.pop(context),
+                              icon: Icon(
+                                Icons.close,
+                                size: getSize(18),
+                                color: Colors.white,
+                              )),
+                        )
                   ],
                 ),
               ),
@@ -68,7 +69,7 @@ class CustomMessageBox extends StatelessWidget {
                         ? Padding(
                             padding: getPadding(all: 6),
                             child: Text(
-                              content,
+                              content ?? '',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.black,
@@ -77,7 +78,7 @@ class CustomMessageBox extends StatelessWidget {
                                   fontFamily: 'SF Pro Display'),
                             ),
                           )
-                        : content,
+                        : content ?? Container(),
                   ),
                 ),
               )

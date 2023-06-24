@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -24,36 +25,66 @@ class ExerciseContentController extends GetxController {
     bufferForPlaybackAfterRebufferDuration: Duration(seconds: 10),
   )));
 
-  final List<AudioCardModel> mainAudios = [];
+  List<AudioCardModel> mainAudios = [];
   EventModel? mainEmotion;
-  List<AudioCardModel>? additionalAudios;
+  List<AudioCardModel> additionalAudios = [];
   List<EventModel>? additionalEmotions;
 
   Future getAudios() async {
+    mainAudios = [];
     var collectionAudio =
         await FirebaseFirestore.instance.collection('Audio').get();
     var audios =
         collectionAudio.docs.map((e) => Audio.fromJson(e.data())).toList();
     mainEmotion = dayEvent.whatEmotion![0];
 
-    if(dayEvent.whatEmotion!.length > 1){
-      additionalEmotions = dayEvent.whatEmotion!.getRange(1, dayEvent.whatEmotion!.length).toList();
+    if (dayEvent.whatEmotion!.length > 1) {
+      additionalEmotions = dayEvent.whatEmotion!
+          .getRange(1, dayEvent.whatEmotion!.length)
+          .toList();
     }
+
+
     for (var audio in audios) {
-      if (audio.emotions
-          .map((e) => e.toLowerCase())
-          .contains(mainEmotion!.name.toLowerCase())) {
-        mainAudios.add(AudioCardModel(
-            audio.name,
-            DataSourceService.dataSourceIsRemote()
-                ? audio.url
-                : '${(await getApplicationDocumentsDirectory()).path}/${audio.folder}/${audio.fileName}.${audio.format}'));
-      } if(additionalEmotions != null) {
-        for(var item in additionalEmotions!) {
-          if (audio.emotions
-              .map((e) => e.toLowerCase())
-              .contains(item.name.toLowerCase())) {}
+      try {
+        if ((audio.emotions ?? [])
+            .map((e) => e.toLowerCase())
+            .contains(mainEmotion!.name.toLowerCase())) {
+          mainAudios.add(AudioCardModel(
+              audio.name,
+              DataSourceService.dataSourceIsRemote()
+                  ? audio.url ??
+                      await FirebaseStorage.instance
+                          .ref(audio.folder +
+                              '/' +
+                              audio.fileName +
+                              '.' +
+                              audio.format)
+                          .getDownloadURL()
+                  : '${(await getApplicationDocumentsDirectory()).path}/${audio.folder}/${audio.fileName}.${audio.format}'));
         }
+        if (additionalEmotions != null) {
+          for (var item in additionalEmotions!) {
+            if ((audio.emotions ?? [])
+                .map((e) => e.toLowerCase())
+                .contains(item.name.toLowerCase())) {
+              additionalAudios.add(AudioCardModel(
+                  audio.name,
+                  DataSourceService.dataSourceIsRemote()
+                      ? audio.url ??
+                          await FirebaseStorage.instance
+                              .ref(audio.folder +
+                                  '/' +
+                                  audio.fileName +
+                                  '.' +
+                                  audio.format)
+                              .getDownloadURL()
+                      : '${(await getApplicationDocumentsDirectory()).path}/${audio.folder}/${audio.fileName}.${audio.format}'));
+            }
+          }
+        }
+      } catch (_) {
+        print(_);
       }
     }
   }

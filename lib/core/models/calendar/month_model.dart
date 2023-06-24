@@ -45,10 +45,10 @@ class MonthModel {
       }
       void _onTap() {
         if (dayEventModel != null && type == CalendarType.Change) {
-          Navigator.pushNamed(context, AppRoutes.calendar_search,
+          Navigator.pushNamed(context, AppRoutes.record_edit,
               arguments: dayEventModel);
         } else if (type == CalendarType.Add) {
-          Navigator.pushNamed(context, AppRoutes.calendar_add,
+          Navigator.pushNamed(context, AppRoutes.record_add,
               arguments:
                   DateTime(currentMonth.year, currentMonth.month, i + 1));
         } else

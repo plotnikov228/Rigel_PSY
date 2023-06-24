@@ -16,7 +16,7 @@ class SelectButtonWidget extends StatelessWidget {
     return TextButton(onPressed: () {
       showDialog(
           barrierColor: Colors.transparent,
-          context: context, builder: (context) => CustomMessageBox(title: title, content: content, height: height != null ? height : 150,));
+          context: context, builder: (context) => CustomMessageBox(title: title, content: content, height: height ?? 150,));
     }, child: Text(title, style: AppStyle.txtSFProDisplayRegular11.copyWith(
           color: isSelect! ? ColorConstant.cyan700 : ColorConstant.deepPurple600
     ),));

@@ -22,7 +22,7 @@ class PillsBottomSheet extends StatelessWidget {
               if(snapshot.connectionState == ConnectionState.waiting){
                 return Center(child: CircularProgressIndicator(color: ColorConstant.cyan700,),);
               }
-
+              return Container();
             },
           ),
         )

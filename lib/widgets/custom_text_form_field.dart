@@ -491,6 +491,12 @@ class CustomTextFormField extends StatelessWidget {
             color: ColorConstant.gray8008c,
           ),
         );
+      case TextFormFieldVariant.UnderLineRed:
+        return UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+          ),
+        );
       case TextFormFieldVariant.Almost:
         return OutlineInputBorder(
           borderRadius: _setOutlineBorderRadius(),
@@ -548,6 +554,8 @@ class CustomTextFormField extends StatelessWidget {
       case TextFormFieldVariant.UnderLineWhiteA700:
         return false;
       case TextFormFieldVariant.UnderLineGray8008c:
+        return false;
+      case TextFormFieldVariant.UnderLineRed:
         return false;
       case TextFormFieldVariant.Almost:
         return true;
@@ -612,6 +620,7 @@ enum TextFormFieldVariant {
   UnderLineGray50,
   UnderLineWhiteA700,
   UnderLineGray8008c,
+  UnderLineRed,
   Almost,
   Accent,
   FillGray200,

@@ -9,22 +9,23 @@ import '../../../widgets/custom_image_view.dart';
 
 class EventCard extends StatelessWidget {
   final EventModel model;
+  final double? cardWidth;
   final double? cardHeight;
   final VoidCallback? onTap;
   final String? suffix;
   final Color? iconColor;
   final bool isSelect;
   final bool? textIsFitted;
-  const EventCard({Key? key, required this.model, this.onTap, this.suffix = '', this.cardHeight = 33, this.iconColor, required this.isSelect, this.textIsFitted}) : super(key: key);
+  const EventCard({Key? key, required this.model, this.onTap, this.suffix = '', this.cardHeight = 33, this.iconColor, required this.isSelect, this.textIsFitted, this.cardWidth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width / 5;
+    final width = MediaQuery.of(context).size.width / 3.6;
     return InkWell(
       onTap: onTap,
       child: SizedBox(
         width:
-            width,
+            cardWidth ?? width,
         child: Column(
           children: [
             Stack(
@@ -34,7 +35,7 @@ class EventCard extends StatelessWidget {
                       cardHeight!
                   ),
                   width:
-                    width
+                    cardWidth ?? width
                   ,
                   decoration: BoxDecoration(
                     color: ColorConstant.fromHex('#F6F5F6').withOpacity(0.77),

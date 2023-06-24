@@ -57,7 +57,7 @@ class NeutralTab extends StatelessWidget {
                   children: list
                       .map((el) => EventCard(
                     textIsFitted: true,
-
+                    cardWidth: MediaQuery.of(context).size.width / 2.4,
                     isSelect: controller.contain(el.name),
                     cardHeight: 44 ,
                     model: el, onTap: () {

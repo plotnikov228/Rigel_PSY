@@ -1,23 +1,25 @@
+import 'package:firebase_storage/firebase_storage.dart';
+
 class Audio {
   final String fileName;
   final String folder;
   final String name;
   final String format;
   final String tab;
-  final String url;
-  final List<String> emotions;
+  final String? url;
+  final List<String>? emotions;
 
   Audio(this.fileName, this.folder, this.name, this.format, this.tab, this.url, this.emotions);
 
   factory Audio.fromJson(Map<String, dynamic> json) {
     return Audio(
-        json['fileName'] as String,
-        json['folder'] as String,
-        json['name'] as String,
-        json['format'] as String,
-        json['tab'] as String,
-      json['url'] as String,
-      (json['emotions'] as String).split(', ')
+        json['fileName'] ?? json['name'],
+        json['folder'] ?? 'audio',
+        json['name'] ?? '',
+        json['format'] ?? 'mp3',
+        json['tab'] ?? '',
+      json['url'] ?? null,
+      (json['emotions'] as String? ?? '').split(', ')
 
     );
   }

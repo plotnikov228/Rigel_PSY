@@ -18,7 +18,11 @@ class ScreenBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CurrentUser.tariffIsStandard() ? ExerciseContentWidget(dayEvent: dayEventModel,) : isNegative ? ifIsNegative() : ifNotNegative();
+    return CurrentUser.tariffIsStandard() ? ExerciseContentWidget(dayEvent: dayEventModel,) : Padding(
+      padding: getPadding(left: 10,
+        right: 10,),
+      child: isNegative ? ifIsNegative() : ifNotNegative(),
+    );
   }
 
   Widget ifIsNegative () {

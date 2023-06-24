@@ -33,70 +33,67 @@ class K39Screen extends GetWidget {
             child: Stack(            alignment: Alignment.bottomCenter,
 
               children: [
-                Padding(
-                    padding: getPadding(
-                      left: 10,
-                      right: 10,
-                      bottom: 5,
-                    ),
-           child: SingleChildScrollView(
+                SingleChildScrollView(
 
-              child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: getPadding(
-                            left: 5,
-                            top: 39,
-                          ),
-                          child: Text(
-                            "Эмоция сейчас",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtSFProDisplayLight10Gray800,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            top: 12,
-                          ),
-                          child: Divider(
-                            height: getVerticalSize(
-                              1,
-                            ),
-                            thickness: getVerticalSize(
-                              1,
-                            ),
-                            color: ColorConstant.gray50,
-                          ),
-                        ),
-                        Padding(
-                          padding: getPadding(
-                            left: 6,
-                            top: 15,
-                          ),
-                          child: Text(
-                            "Как прожить эмоции",
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.left,
-                            style: AppStyle.txtH1,
-                          ),
-                        ),
-                        GetBuilder(builder: (K39Controller _c) => VoiceButton(currentState: controller.currentState, controller: controller,)),
-                        Padding(
-                          padding: getPadding(
-                            top: 30,
-                          ),
-                          child: ScreenBodyWidget(isNegative: dayEventModel.emotionInDayEvent == EmotionInDayEvent.NEGATIVE, dayEventModel: dayEventModel,)
-                        ),
-                        SizedBox(
-                          height: getVerticalSize(140),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                   child: Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           mainAxisAlignment: MainAxisAlignment.start,
+                           children: [
+                             Padding(
+                               padding: getPadding(
+                                 left: 15,
+                                 right: 10,
+                                 top: 39,
+                               ),
+                               child: Text(
+                                 "Эмоция сейчас",
+                                 overflow: TextOverflow.ellipsis,
+                                 textAlign: TextAlign.left,
+                                 style: AppStyle.txtSFProDisplayLight10Gray800,
+                               ),
+                             ),
+                             Padding(
+                               padding: getPadding(
+                                 top: 12,
+                                 left: 10,
+                                 right: 10,
+                               ),
+                               child: Divider(
+                                 height: getVerticalSize(
+                                   1,
+                                 ),
+                                 thickness: getVerticalSize(
+                                   1,
+                                 ),
+                                 color: ColorConstant.gray50,
+                               ),
+                             ),
+                             Padding(
+                               padding: getPadding(
+                                 left: 16,
+                                 right: 10,
+                                 top: 15,
+                               ),
+                               child: Text(
+                                 "Как прожить эмоции",
+                                 overflow: TextOverflow.ellipsis,
+                                 textAlign: TextAlign.left,
+                                 style: AppStyle.txtH1,
+                               ),
+                             ),
+                             GetBuilder(builder: (K39Controller _c) => VoiceButton(currentState: controller.currentState, controller: controller,)),
+                             Padding(
+                               padding: getPadding(
+                                 top: 30,
+                               ),
+                               child: ScreenBodyWidget(isNegative: dayEventModel.emotionInDayEvent == EmotionInDayEvent.NEGATIVE, dayEventModel: dayEventModel,)
+                             ),
+                             SizedBox(
+                               height: getVerticalSize(140),
+                             )
+                           ],
+                         ),
+                       ),
           Container(
             width: size.width,
             height: getVerticalSize(60),
@@ -108,7 +105,7 @@ class K39Screen extends GetWidget {
               color: ColorConstant.gray300,
             child: Center(
           child: Padding(
-            padding: getPadding(left: 16, bottom: 10, right: 16),
+            padding: getPadding(left: 26, bottom: 10, right: 26),
             child: CustomButton(
               height: getVerticalSize(
                 32,

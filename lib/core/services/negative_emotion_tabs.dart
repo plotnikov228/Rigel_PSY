@@ -24,7 +24,6 @@ class NegativeEmotionTabs {
           'Tabs_Images').get();
 
 
-      DataSourceService.getDataSourceType();
 
       await prefs.setString(TABS_KEY,
           '{${_tabs.docs.map((e) => e.data().toString()).toString()}}'

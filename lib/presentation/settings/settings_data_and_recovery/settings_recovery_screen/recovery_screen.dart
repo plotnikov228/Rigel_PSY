@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:listenmebaby71_s_application17/core/db/firebase_firestore/models/backup_model.dart';
 
 import '../../../../core/app_export.dart';
 import '../../../../core/utils/size_utils.dart';
@@ -16,7 +17,8 @@ class RecoveryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RecoveryController());
+    final service = (ModalRoute.of(context)?.settings.arguments as String?) ?? 'google drive';
+    final controller = Get.put(RecoveryController(context));
     return SafeArea(
         child: Scaffold(
           bottomNavigationBar:
@@ -45,8 +47,8 @@ class RecoveryScreen extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: AppStyle.txtSFProDisplayLight16)),
             FutureBuilder(
-                future: controller.getRecoveryData(),
-                builder: (context, AsyncSnapshot<List<RecoveryData>> snapshot) {
+                future: controller.getRecoveryData(service),
+                builder: (context, AsyncSnapshot<List<BackupModel>> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return CircularProgressIndicator(
                       color: ColorConstant.cyan700,);
@@ -57,9 +59,9 @@ class RecoveryScreen extends StatelessWidget {
                     children: (snapshot.data ?? [])
                         .map((e) => CardRecoveryButtonWidget(
                         context, controller: controller,
-                        title: e.title,
-                        subTitle: e.subtitle,
-                        onTap: () => controller.setUpRecoveryData(e)))
+                        title: e.date_time,
+                        subTitle: e.record,
+                        onTap: () => controller.setUpRecoveryData(e, service)))
                         .toList(),
 
                   );

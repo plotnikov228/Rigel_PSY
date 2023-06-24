@@ -17,10 +17,13 @@ class ExerciseContentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ExerciseContentController(dayEvent));
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
     Padding(
     padding: getPadding(
       top: 34,
+      left: 10,
+      right: 10,
     ),
     child: Text(
     "Основная эмоция",
@@ -33,6 +36,8 @@ class ExerciseContentWidget extends StatelessWidget {
         Padding(
           padding: getPadding(
             top: 34,
+            left: 10,
+            right: 10,
           ),
           child: Text(
             dayEvent.getEmotionType(),
@@ -43,7 +48,9 @@ class ExerciseContentWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: getPadding(top: 18),
+          padding: getPadding(top: 18,
+            left: 10,
+            right: 10,),
           child: EventCard(
             iconColor: dayEvent.whatEmotion!.length > 1 ? ColorConstant.fromHex('#5B4FA9') : ColorConstant.cyan700,
             model: dayEvent.whatEmotion![0],
@@ -56,17 +63,21 @@ class ExerciseContentWidget extends StatelessWidget {
           ),
           child: SizedBox(
             width: getHorizontalSize(135),
-            child: Text(
-              'Нажмите, чтобы увидеть связанные эмоции',
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.left,
-              style: AppStyle.txtSFProDisplayLight10Gray800,
+            child: Expanded(
+              child: Text(
+                'Нажмите, чтобы увидеть связанные эмоции',
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: AppStyle.txtSFProDisplayLight10Gray800,
+              ),
             ),
           ),
         ),
         Padding(
           padding: getPadding(
             top: 19,
+            left: 10,
+            right: 10,
           ),
           child: Text(
             "Как прожить " + dayEvent.whatEmotion![0].name.toLowerCase(),
@@ -85,16 +96,21 @@ class ExerciseContentWidget extends StatelessWidget {
             }
             return Column(children: [
               Padding(
-                padding: getPadding(top: 12),
+                padding: getPadding(top: 12,
+                  left: 10,
+                  right: 10,),
                 child: AudioContainers(audios: controller.mainAudios, controller: controller,),
               ),
               Visibility(
                   visible: dayEvent.whatEmotion!.length > 1,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: getPadding(
                       top: 34,
+                      left: 10,
+                      right: 10,
                     ),
                     child: Text(
                       "Дополнительные эмоции",
@@ -107,6 +123,8 @@ class ExerciseContentWidget extends StatelessWidget {
                   Padding(
                       padding: getPadding(
                         top: 18,
+                        left: 10,
+                        right: 10,
                       ),
                       child: SizedBox(
                         height: getVerticalSize(90),
@@ -131,6 +149,8 @@ class ExerciseContentWidget extends StatelessWidget {
                   Padding(
                     padding: getPadding(
                       top: 18,
+                      left: 10,
+                      right: 10,
                     ),
                     child: Text(
                       "Как прожить дополнительные эмоции:",
@@ -142,7 +162,7 @@ class ExerciseContentWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: getPadding(top: 12),
-                    child: AudioContainers(audios: controller.additionalAudios ?? [], controller: controller, startIndex: controller.mainAudios.length,),
+                    child: AudioContainers(audios: controller.additionalAudios, controller: controller, startIndex: controller.mainAudios.length,),
                   ),
                 ],
               ))

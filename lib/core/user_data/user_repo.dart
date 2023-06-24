@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:listenmebaby71_s_application17/core/user_data/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,13 +10,13 @@ class UserRepo {
   SharedPreferences? prefs;
   final collection = FirebaseFirestore.instance.collection('Users');
   final collectionUsersData = FirebaseFirestore.instance.collection('UsersData');
-
+  final userId = FirebaseAuth.instance.currentUser?.email  ?? CurrentUser.user.number;
   // set
   Future setLogin (String text) async {
     if(prefs == null)
       prefs = await SharedPreferences.getInstance();
     await prefs!.setString('login', text);
-    await collection.doc(CurrentUser.user.number).update({
+    await collection.doc(userId).update({
       "login" : text,
       "number" : CurrentUser.user.number,
       "tariff" : CurrentUser.user.currentTariff!.name,
@@ -44,7 +45,7 @@ class UserRepo {
     if(prefs == null)
       prefs = await SharedPreferences.getInstance();
     await prefs!.setString('number', text);
-    await collection.doc(text).set({
+    await collection.doc(userId == CurrentUser.user.number ? text : userId).set({
       "login" : CurrentUser.user.login,
       "number" : text,
       "tariff" : CurrentUser.user.currentTariff!.name,
@@ -53,13 +54,17 @@ class UserRepo {
       "male": CurrentUser.user.male,
       'old': CurrentUser.user.old
     });
-    await collectionUsersData.doc(text).set({
+    await collectionUsersData.doc(userId == CurrentUser.user.number ? text : userId).update({
       "number": text,
-      "password": (await collectionUsersData.doc(CurrentUser.user.number).get()).data()!['password']
     });
     if(CurrentUser.user.number != text) {
-      collection.doc(CurrentUser.user.number).delete();
-      collectionUsersData.doc(CurrentUser.user.number).delete();
+      try {
+        collection.doc(CurrentUser.user.number).delete();
+        collectionUsersData.doc(CurrentUser.user.number).delete();
+      } catch (_) {
+
+      }
+
     }
     CurrentUser.user.number = text;
   }
@@ -79,7 +84,7 @@ class UserRepo {
     if(prefs == null)
       prefs = await SharedPreferences.getInstance();
     await prefs!.setInt('old', val);
-    await collection.doc(CurrentUser.user.number).update({
+    await collection.doc(userId).update({
       "login" : CurrentUser.user.login,
       "number" : CurrentUser.user.number,
       "tariff" : CurrentUser.user.currentTariff!.name,
@@ -94,7 +99,7 @@ class UserRepo {
     if(prefs == null)
       prefs = await SharedPreferences.getInstance();
     await prefs!.setBool('gender', val);
-    await collection.doc(CurrentUser.user.number).update({
+    await collection.doc(userId).update({
       "login" : CurrentUser.user.login,
       "number" : CurrentUser.user.number,
       "tariff" : CurrentUser.user.currentTariff!.name,

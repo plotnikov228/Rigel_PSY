@@ -47,5 +47,17 @@ class UserModel {
      );
    }
 
+
+
+   Map<String, dynamic> userToFirebase () => {
+     'registration_date': this.registrationDate.toIso8601String(),
+     'login': this.login,
+     'tariff': this.currentTariff!.name,
+     'tariff_is_end': this.currentTariff!.endDate.toIso8601String(),
+     'number': this.number,
+     'male': this.male,
+     'old': this.old
+   };
+
    Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

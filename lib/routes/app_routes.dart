@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:listenmebaby71_s_application17/presentation/initial_setup/sign_in/verification_screen/verification_screen.dart';
 
 import '../presentation/charts/charts_calendar/k62_screen.dart';
 import '../presentation/charts/charts_screen/k61_screen.dart';
 import '../presentation/enter_password_screen/enter_password_screen.dart';
 import '../presentation/initial_setup/recomendation_buy_tariff_screen/k4_screen.dart';
+import '../presentation/initial_setup/sign_in/reset_password_screen/reset_password_screen.dart';
 import '../presentation/initial_setup/set_reminders_screen/k3_screen.dart';
-import '../presentation/initial_setup/sign_in_screen/k2_screen.dart';
-import '../presentation/initial_setup/sign_up_screen/k2_screen.dart';
+import '../presentation/initial_setup/sign_in/sign_in_screen/k2_screen.dart';
+import '../presentation/initial_setup/sign_in/sign_up_screen/k2_screen.dart';
 import '../presentation/initial_setup/splash_screen/k1_screen.dart';
 import '../presentation/main/main_screen/k20_screen.dart';
 import '../presentation/main/path/add_emotion_screen/k24_page.dart';
@@ -28,6 +30,7 @@ import '../presentation/records/records_screen/k49_screen.dart';
 import '../presentation/settings/about_app_screen/k7_screen.dart';
 import '../presentation/settings/settings_buy_subscription_screen/k14_screen.dart';
 import '../presentation/settings/settings_data_and_recovery/settings_data_and_recovery_screen/data_and_recovery_screen.dart';
+import '../presentation/settings/settings_data_and_recovery/settings_recovery_screen/recovery_screen.dart';
 import '../presentation/settings/settings_errors_screen/k11_screen.dart';
 import '../presentation/settings/settings_offers_screen/k10_screen.dart';
 import '../presentation/settings/settings_payment_subscription_screen/k15_screen.dart';
@@ -61,6 +64,8 @@ class AppRoutes {
   static const String repeatPassword = '/settings_repeat_password_screen';
 
   static const String offers = '/settings_offers_screen';
+
+  static const String recovery = '/recovery';
 
   static const String errors = '/settings_errors_screen';
 
@@ -120,7 +125,13 @@ static const String enterPasswordScreen = '/enter_password_screen';
 
   static const String data_and_recovery = '/data_and_recovery';
 
+  static const String verify = '/verify';
+
+  static const String resetPassword = '/verify';
+
+
   static String currentRoute = main;
+
 
   static Map<String, WidgetBuilder> routes = {
     enterPasswordScreen: (context) => EnterPasswordScreen(),
@@ -128,6 +139,8 @@ static const String enterPasswordScreen = '/enter_password_screen';
     splashScreen: (context) => K1Screen(),
     signUp: (context) => K2Screen(),
     signIn: (context) => K2AuthScreen(),
+    verify: (context) => VerificationScreen(),
+    resetPassword: (context) => ResetPasswordScreen(),
     setRemindersScreen: (context) => K3Screen(),
     recommendationBuyTariff: (context) => K4Screen(),
     // settings
@@ -145,6 +158,7 @@ static const String enterPasswordScreen = '/enter_password_screen';
     tariffActivated: (context) => K17Screen(),
     profile: (context) => K18Screen(),
     data_and_recovery: (context) => DataAndRecoveryScreen(),
+    recovery: (context) => RecoveryScreen(),
     // main
     main: (context) => K20Screen(),
     addEmotion: (context) => K24Page(),
