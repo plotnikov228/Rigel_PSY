@@ -27,25 +27,8 @@ class K38Controller extends GetxController {
     final events = await _repo.getEvent();
     events.add(dayEventModel);
     await _repo.updateEvent(events);
-    showDialog(context: context, builder: (BuildContext context) => WillPopScope(
-      onWillPop: () async {
-        final list = await _K27repo.getEvent(HiveDBTags.emotions1);
-        bool goToMain = true;
-        for(var item in list){
-          if(item.name == dayEventModel.whatEmotion!.first) {
-              Navigator.pushNamedAndRemoveUntil(context, AppRoutes.path_final, (route) => false, arguments: dayEventModel);
-            goToMain = false;
-            break;
-          }
-        }
-        if(goToMain) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.main, (route) => false);
-        }
-        _deleteControllers();
-        return false;
-      },
-      child: CustomMessageBox(
+    showDialog(context: context, builder: (BuildContext context) =>
+      CustomMessageBox(
         onPop: () {
           Navigator.pop(context);
           Navigator.pushNamed(context, AppRoutes.path_final, arguments: dayEventModel);
@@ -56,7 +39,12 @@ class K38Controller extends GetxController {
         content:
         'Запись ${DateTime.now().day} ${DateTime.now().month.monthInText()} ${DateTime.now().year} г ${DateTime.now().hour.timeFormatted()}:${DateTime.now().minute.timeFormatted()} сохранена',
       ),
-    ));
+    ).then((value) async {
+
+          Navigator.pushNamedAndRemoveUntil(context, AppRoutes.path_final, (route) => false, arguments: dayEventModel);
+
+      _deleteControllers();
+    });
   }
 
   void _deleteControllers (){

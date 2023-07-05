@@ -85,9 +85,12 @@ class ExerciseContentController extends GetxController {
             }
           }
         }
+
       } catch (_) {
         print(_);
       }
     }
+    print(additionalAudios.length);
+    print(mainAudios.length);
   }
 }

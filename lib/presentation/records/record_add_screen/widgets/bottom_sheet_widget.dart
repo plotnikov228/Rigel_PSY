@@ -122,37 +122,30 @@ class BottomSheetWidget extends StatelessWidget {
                 ),
 
               Center(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 10,
-                  child: GetBuilder(
-                    builder: (K54Controller _c) => Padding(
-                      padding: getPadding(left: 6),
-                      child: Wrap(
-                          children: list is List<EventModel>
-                              ? list!.map((el) => Padding(
-                                      padding: getPadding(
-                                          right: MediaQuery.of(context).size.width /
-                                              30,
-                                          bottom: 16),
-                                      child: EventCard(
-                                        model: el as EventModel,
-                                        onTap: () => onChangeEventModel!(el), isSelect: false,
-                                      )))
-                                  .toList()
-                              : list is List<K32Model> ? list!.map((e) => Padding(
-                                          padding:
-                                              getPadding(right: 12, bottom: 18),
-                                          child: BodyPartWidget(
-                                            model: (e as K32Model).bodyPartsModel,
-                                            controller: controller,
-                                            title: (e.bodyPartsModel).bodyPart,
-                                            color: Colors.white,
-                                          ),
+                child: GetBuilder(
+                  builder: (K54Controller _c) => Padding(
+                    padding: getPadding(left: 6),
+                    child: Wrap(
+                      spacing: 12,
+                        children: list is List<EventModel>
+                            ? list!.map((el) => EventCard(
+                              model: el as EventModel,
+                              onTap: () => onChangeEventModel!(el), isSelect: false,
+                            ))
+                                .toList()
+                            : list is List<K32Model> ? list!.map((e) => Padding(
+                                        padding:
+                                            getPadding(right: 12, bottom: 18),
+                                        child: BodyPartWidget(
+                                          model: (e as K32Model).bodyPartsModel,
+                                          controller: controller,
+                                          title: (e.bodyPartsModel).bodyPart,
+                                          color: Colors.white,
                                         ),
-                                      )
-                                      .toList()
-                                  : []),
-                    ),
+                                      ),
+                                    )
+                                    .toList()
+                                : []),
                   ),
                 ),
               )

@@ -29,7 +29,7 @@ class K11Controller extends GetxController {
         imageToUpload: model.value.file!, title: '${CurrentUser.user.number} ${model.value.fileName}');
 
 
-    await collection.doc('${CurrentUser.user.number} ${DateTime.now().toIso8601String()}').set({
+    await collection.doc('${CurrentUser.repo.userId()} ${DateTime.now().toIso8601String()}').set({
       "text": model.value.controller.text,
       "image_source": storageResult.imageUrl,
       "image_name": storageResult.imageFileName
