@@ -369,7 +369,7 @@ class AppStyle {
       9,
     ),
     fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w300,
   );
 
   static TextStyle txtSFProDisplayLight10Gray8001 = TextStyle(

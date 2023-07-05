@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
 import 'package:listenmebaby71_s_application17/widgets/custom_bottom_bar.dart';
 import 'package:listenmebaby71_s_application17/widgets/custom_button.dart';
@@ -7,6 +8,7 @@ import 'package:listenmebaby71_s_application17/widgets/custom_button.dart';
 import '../../../core/models/tariff_model.dart';
 import '../../../widgets/custom_message_box.dart';
 import '../../../widgets/custom_pop_button.dart';
+import 'controller.dart';
 
 class K14Screen extends StatelessWidget {
 
@@ -14,7 +16,16 @@ class K14Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TariffModel? tariff = ModalRoute.of(context)!.settings.arguments as TariffModel;
+    late final TariffModel? tariff;
+    String? promo;
+    final _args = ModalRoute.of(context)!.settings.arguments;
+    if (_args is TariffModel) {
+      tariff = _args;
+    } else {
+      tariff = TariffModel.fromJson ((_args as Map<String, dynamic>)['tariff']);
+      promo = _args['promo'];
+    }
+    final controller = Get.put(BuySubscriptionController(promo));
     return SafeArea(
         child: Scaffold(
             backgroundColor: ColorConstant.gray300,
@@ -115,7 +126,7 @@ class K14Screen extends StatelessWidget {
                                   padding: ButtonPadding.PaddingAll19,
                                   fontStyle: ButtonFontStyle
                                       .SFProDisplayRegular12Cyan700,
-                                  onTap: () async => await onTaptf(context, tariff)),
+                                  onTap: () async => await controller.onTapGoToTariff(tariff!, context)),
                               Padding(
                                   padding: getPadding(top: 14),
                                   child: Text("за  ${tariff.cost.toInt()} ₽/год",
@@ -138,20 +149,9 @@ class K14Screen extends StatelessWidget {
                             ])))),
             bottomNavigationBar:
                 CustomBottomBar(onChanged: (BottomBarEnum type) {})));
-  }
+    }
 
-  Future onTaptf(BuildContext context, TariffModel tariff) async {
-    if((await FirebaseFirestore.instance.collection('Permissions').doc('payment').get()).data()?['value'] == false){
-    showDialog(
-    context: context, builder: (BuildContext context) =>
-    CustomMessageBox(
-    title: 'Rigel PSY',
-    content:
-    'В данный момент, возможность оплаты в приложении, заблокирована. Извините за неудобства.',
-    ),);
-    } else
-    Navigator.pushNamed(context, AppRoutes.paymentSubscription, arguments: tariff);
-  }
+
 
   onTaptf1(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.subscription);

@@ -66,7 +66,7 @@ class DataAndRecoveryScreen extends StatelessWidget {
                         builder: (DataAndRecoveryController _c) => CardDataAndRecoveryButtonWidget(context,
                             controller: controller,
                             title: 'Резервная копия',
-                            onTap: () async => await controller.createServiceBackup(context),
+                            onTap: controller.service == '' ? null : () async => await controller.createServiceBackup(context),
                             suffixWidget: Column(
                               children: [
                                 Text(
@@ -82,7 +82,7 @@ class DataAndRecoveryScreen extends StatelessWidget {
                       ),
                       CardDataAndRecoveryButtonWidget(context,
                           controller: controller,
-                          onTap: () => Navigator.pushNamed(context, AppRoutes.recovery, arguments: controller.service),
+                          onTap: controller.service == '' ? null : () => Navigator.pushNamed(context, AppRoutes.recovery, arguments: controller.service),
                           title: 'Восстановить',
                           suffixWidget: CustomImageView(
                               svgPath: ImageConstant.imgArrowrightGray700,
