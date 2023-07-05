@@ -68,6 +68,17 @@ class K6Screen extends GetWidget {
                                   svgSize: 20,
                               ),
 
+                              /*SizedBox(
+                                height: getVerticalSize(21),
+                              ),
+                              CardSettingsButtonWidget(context,
+                                  onTap: () async => await controller.onTapPill(context),
+                                title: 'Напоминания о приеме',
+                                svgIcon: ImageConstant.imgPill,
+                                controller: controller,
+                                svgSize: 24,
+                                height: 53
+                              ),*/
                               SizedBox(
                                 height: getVerticalSize(85),
                               ),

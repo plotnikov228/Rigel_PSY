@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
 import 'package:listenmebaby71_s_application17/widgets/custom_bottom_bar.dart';
 import 'package:listenmebaby71_s_application17/widgets/custom_button.dart';
@@ -7,23 +8,39 @@ import 'package:listenmebaby71_s_application17/widgets/custom_text_form_field.da
 import '../../../core/models/tariff_model.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../../../widgets/custom_pop_button.dart';
+import 'controller.dart';
 import 'text_field_formatter.dart';
 
 class K15Screen extends StatelessWidget {
 
-  TextEditingController sixtyController = TextEditingController();
+  final fullNameController = TextEditingController();
 
-  TextEditingController sixtyTwoController = TextEditingController();
+  final dateController = TextEditingController();
 
-  TextEditingController sixtyFourController = TextEditingController();
+  final cardNumberController = TextEditingController();
 
-  TextEditingController cvOneController = TextEditingController();
+  final cvController = TextEditingController();
 
-  TextEditingController languageTwoController = TextEditingController();
+  final countController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
-    final tariff = ModalRoute.of(context)!.settings.arguments as TariffModel;
+    final controller = Get.put(PaymentSubscriptionController(context));
+    final tariff = ModalRoute
+        .of(context)!
+        .settings
+        .arguments as TariffModel;
+
+    confirm(BuildContext context, TariffModel tariff) async {
+      if (fullNameController.text != null && dateController.text.length == 5 &&
+          cardNumberController.text.length == 19 &&
+          cvController.text.length == 3)
+        await controller.pay(tariff);
+
+      else ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Заполните все поля!')));
+    }
+
     return SafeArea(
         child: Scaffold(
             backgroundColor: ColorConstant.gray300,
@@ -33,7 +50,7 @@ class K15Screen extends StatelessWidget {
                 child: SingleChildScrollView(
                     child: Padding(
                         padding:
-                            getPadding(left: 16, right: 16, bottom: 5),
+                        getPadding(left: 16, right: 16, bottom: 5),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -41,8 +58,10 @@ class K15Screen extends StatelessWidget {
                               CustomAppBar(widget: Row(
                                 children: [
                                   CustomPopButton(text: 'Настройки'),
-                                  Text(' | Подписка ', style: AppStyle.txtSFProDisplayLight10,),
-                                  Text('| Купить подписку', style: AppStyle.txtSFProDisplayLight10Gray800,)
+                                  Text(' | Подписка ',
+                                    style: AppStyle.txtSFProDisplayLight10,),
+                                  Text('| Купить подписку', style: AppStyle
+                                      .txtSFProDisplayLight10Gray800,)
                                 ],
                               ),),
                               Padding(
@@ -66,11 +85,11 @@ class K15Screen extends StatelessWidget {
                                           .txtSFProDisplayLight14Gray800)),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: sixtyController,
+                                  controller: fullNameController,
                                   hintText: "Oleg Petrov",
                                   margin: getMargin(top: 20),
                                   variant:
-                                      TextFormFieldVariant.UnderLineGray8008c,
+                                  TextFormFieldVariant.UnderLineGray8008c,
                                   hintStyle: TextFormFieldFontStyle
                                       .SFProDisplayLight12,
                                   fontStyle: TextFormFieldFontStyle
@@ -84,14 +103,15 @@ class K15Screen extends StatelessWidget {
                                           .txtSFProDisplayLight14Gray800)),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: sixtyTwoController,
-                                  hintText: "00/00",formatter: [SecondFieldFormatter()],
+                                  controller: dateController,
+                                  hintText: "00/00",
+                                  formatter: [SecondFieldFormatter()],
                                   maxLength: 5,
                                   textInputType: TextInputType.number,
                                   counterText: '',
                                   margin: getMargin(top: 19),
                                   variant:
-                                      TextFormFieldVariant.UnderLineGray8008c,
+                                  TextFormFieldVariant.UnderLineGray8008c,
                                   hintStyle: TextFormFieldFontStyle
                                       .SFProDisplayLight12,
                                   fontStyle: TextFormFieldFontStyle
@@ -105,7 +125,7 @@ class K15Screen extends StatelessWidget {
                                           .txtSFProDisplayLight14Gray800)),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: sixtyFourController,
+                                  controller: cardNumberController,
                                   maxLength: 19,
                                   textInputType: TextInputType.number,
                                   hintText: "0000 0000 0000 0000",
@@ -113,7 +133,7 @@ class K15Screen extends StatelessWidget {
                                   formatter: [ThirdFieldFormatter()],
                                   margin: getMargin(top: 18),
                                   variant:
-                                      TextFormFieldVariant.UnderLineGray8008c,
+                                  TextFormFieldVariant.UnderLineGray8008c,
                                   hintStyle: TextFormFieldFontStyle
                                       .SFProDisplayLight12,
                                   fontStyle: TextFormFieldFontStyle
@@ -127,7 +147,7 @@ class K15Screen extends StatelessWidget {
                                           .txtSFProDisplayLight14Gray800)),
                               CustomTextFormField(
                                   focusNode: FocusNode(),
-                                  controller: cvOneController,
+                                  controller: cvController,
                                   textInputType: TextInputType.number,
                                   isObscureText: true,
                                   maxLength: 3,
@@ -135,7 +155,7 @@ class K15Screen extends StatelessWidget {
                                   hintText: "***",
                                   margin: getMargin(top: 17),
                                   variant:
-                                      TextFormFieldVariant.UnderLineGray8008c,
+                                  TextFormFieldVariant.UnderLineGray8008c,
                                   hintStyle: TextFormFieldFontStyle
                                       .SFProDisplayLight12,
                                   fontStyle: TextFormFieldFontStyle
@@ -148,8 +168,11 @@ class K15Screen extends StatelessWidget {
                                       style: AppStyle
                                           .txtSFProDisplayLight14Gray800)),
                               Container(
-                                margin: getMargin(top: 19),
-                                child: (Text(tariff.cost.toInt().toString() + ' руб', style: AppStyle.txtSFProDisplayLight12Gray800,))
+                                  margin: getMargin(top: 19),
+                                  child: (Text(
+                                    tariff.cost.toInt().toString() + ' руб',
+                                    style: AppStyle
+                                        .txtSFProDisplayLight12Gray800,))
                               ),
                               Center(
                                 child: CustomButton(
@@ -163,7 +186,7 @@ class K15Screen extends StatelessWidget {
                                     padding: ButtonPadding.PaddingAll19,
                                     fontStyle: ButtonFontStyle
                                         .SFProDisplayRegular12Cyan700,
-                                    onTap: () => onTaptf(context, tariff)),
+                                    onTap: () => confirm(context, tariff)),
                               ),
                               CustomButton(
                                   height: getVerticalSize(32),
@@ -179,12 +202,6 @@ class K15Screen extends StatelessWidget {
                                   alignment: Alignment.center)
                             ])))),
             bottomNavigationBar:
-                CustomBottomBar(onChanged: (BottomBarEnum type) {})));
-  }
-
-  onTaptf(BuildContext context, TariffModel tariff) {
-    if(sixtyController.text != null && sixtyTwoController.text.length == 5 && sixtyFourController.text.length == 19 && cvOneController.text.length == 3)
-    Navigator.pushNamed(context, AppRoutes.tariffActivated, arguments: tariff);
-    else ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Заполните все поля!')));
+            CustomBottomBar(onChanged: (BottomBarEnum type) {})));
   }
 }

@@ -15,10 +15,11 @@ Widget CardSettingsButtonWidget(BuildContext context,
     required String svgIcon, double? svgSize,
     required String title,
     Function(bool)? onSwitch,
-    bool? valueForSwitch}) {
+    bool? valueForSwitch, double height = 38}) {
   return InkWell(
       onTap: onTap,
       child: Container(
+        height: getVerticalSize(height),
           margin: getMargin(top: 1),
           padding: getPadding(left: 7, top: 5, right: 7, bottom: 5),
           decoration: AppDecoration.outlineBluegray80014

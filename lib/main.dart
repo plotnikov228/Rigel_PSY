@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:listenmebaby71_s_application17/core/db/hive_db.dart';
-import 'package:listenmebaby71_s_application17/core/services/workmanager_service.dart';
+import 'package:listenmebaby71_s_application17/core/services/workmanager/workmanager_service.dart';
 import 'package:listenmebaby71_s_application17/core/user_data/user.dart';
 import 'package:listenmebaby71_s_application17/routes/app_routes.dart';
 
@@ -21,8 +21,8 @@ void main() async {
   ]);
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
-  await WorkManagerService().initService();
   await HiveDB.initDB();
+  await WorkManagerService().initService();
   await CurrentUser.init();
   runApp(MyApp());
 }

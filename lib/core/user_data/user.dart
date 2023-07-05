@@ -41,7 +41,7 @@ class CurrentUser extends UserModel {
         print(statuses[Permission.storage]);
       }
     }
-
+    repo.authService = await repo.getService();
     user.login = await repo.getLogin();
     user.password = await repo.getPass();
     user.number = await repo.getNumber();

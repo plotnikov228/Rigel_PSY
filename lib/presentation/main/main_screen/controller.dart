@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:listenmebaby71_s_application17/core/app_export.dart';
 import 'package:listenmebaby71_s_application17/core/user_data/user.dart';
+import 'package:listenmebaby71_s_application17/presentation/settings/settings_data_and_recovery/settings_data_and_recovery_screen/controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/custom_button.dart';
@@ -14,6 +16,17 @@ class K20Controller extends GetxController {
   Rx<bool> canView = false.obs;
 
   Future openMessages (BuildContext context) async {
+    try {
+      final dataAndRecoveryController = Get.put(DataAndRecoveryController());
+      dataAndRecoveryController.init();
+      if(dataAndRecoveryController.serviceEnable && DateTime.now().difference(dataAndRecoveryController.serviceCopyData ?? DateTime.now()).inDays > 6 || dataAndRecoveryController.serviceCopyData == null) {
+        await dataAndRecoveryController.setCopyData(DataAndRecoveryController.serviceCopyDataKey, dataAndRecoveryController.serviceCopyData, DateTime.now());
+      }
+    } catch (_) {
+      
+    }
+
+
     const FIRST_MONTH_KEY = 'MONTH_PASSED';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if(CurrentUser.user.registrationDate.month != DateTime.now().month || CurrentUser.user.registrationDate.year != DateTime.now().year){

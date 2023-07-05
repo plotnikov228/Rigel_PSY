@@ -149,7 +149,7 @@ class K49Screen extends GetWidget {
                     ) :   Wrap(
                       children: controller.events.map((e) => Padding(padding: getPadding(bottom: 16),
                       child: DayEventWidget(
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.record_edit, arguments: e.first),
+                        onTap: () => Navigator.pushNamed(context, AppRoutes.record_edit, arguments: e.first).then((value) => controller.update()),
                         dayEventModels: e,
                       ),
                       )).toList(),

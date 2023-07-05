@@ -1,4 +1,4 @@
-package com.listenmebabysapplication.app
+package com.rigel_psy.app
 
 import io.flutter.embedding.android.FlutterActivity
 

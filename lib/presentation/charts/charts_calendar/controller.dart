@@ -3,13 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/models/calendar/calendar_controller.dart';
 import '../../../core/models/calendar/day_model.dart';
 import '../../../core/models/calendar/month_model.dart';
 
-class K62Controller extends GetxController {
+class K62Controller extends CalendarController {
   final BuildContext context;
 
-  K62Controller(this.context);
+  K62Controller(this.context) : super(context);
 
   void init () {
     state = PeriodState.Start;

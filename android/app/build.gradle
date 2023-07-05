@@ -41,7 +41,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.listenmebabysapplication.app"
+        applicationId "com.rigel_psy.app"
         minSdkVersion 21
         targetSdkVersion 33
         versionCode 3

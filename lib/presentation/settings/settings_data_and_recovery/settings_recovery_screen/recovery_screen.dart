@@ -17,7 +17,7 @@ class RecoveryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final service = (ModalRoute.of(context)?.settings.arguments as String?) ?? 'google drive';
+    final service = (ModalRoute.of(context)?.settings.arguments as String?) ?? 'Google Drive';
     final controller = Get.put(RecoveryController(context));
     return SafeArea(
         child: Scaffold(
@@ -46,26 +46,37 @@ class RecoveryScreen extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.left,
                     style: AppStyle.txtSFProDisplayLight16)),
-            FutureBuilder(
-                future: controller.getRecoveryData(service),
-                builder: (context, AsyncSnapshot<List<BackupModel>> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator(
-                      color: ColorConstant.cyan700,);
-                  }
-                  return Wrap(
-                    direction: Axis.vertical,
-                    spacing: 1,
-                    children: (snapshot.data ?? [])
-                        .map((e) => CardRecoveryButtonWidget(
-                        context, controller: controller,
-                        title: e.date_time,
-                        subTitle: e.record,
-                        onTap: () => controller.setUpRecoveryData(e, service)))
-                        .toList(),
+            Padding(
+              padding: getPadding(top: 40),
+              child: GetBuilder(
+                builder: (RecoveryController _c) => FutureBuilder(
+                    future: controller.getRecoveryData(service),
+                    builder: (context, AsyncSnapshot<List<BackupModel>> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator(
+                          color: ColorConstant.cyan700,);
+                      }
+                      return Wrap(
+                        direction: Axis.vertical,
+                        spacing: 1,
+                        children: (snapshot.data ?? [])
+                            .map((e) => CardRecoveryButtonWidget(
+                            context, controller: controller,
+                            title: e.date_time,
+                            subTitle: e.record,
+                            suffixWidget: InkWell(
+                              onTap: () async {
+                                await controller.deleteBackup(e);
+                              },
+                              child: Center(child: Icon(Icons.close, size: getVerticalSize(18), color: ColorConstant.deepPurple600,)),
+                            ),
+                            onTap: () => controller.setUpRecoveryData(e, service, context)))
+                            .toList(),
 
-                  );
-                })
+                      );
+                    }),
+              ),
+            )
                 ]),
           ),
         )));

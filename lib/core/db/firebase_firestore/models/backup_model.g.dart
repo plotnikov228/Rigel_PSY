@@ -20,5 +20,5 @@ Map<String, dynamic> _$BackupModelToJson(BackupModel instance) =>
       'file_ID': instance.file_ID,
       'date_time': instance.date_time,
       'record': instance.record,
-      'file_name':instance.file_name
+      'file_name': instance.file_name,
     };

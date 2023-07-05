@@ -146,11 +146,13 @@ class K2Screen extends GetWidget<K2Controller> {
                                                   .txtSFProDisplayLight16)),
                                       Padding(
                                           padding: getPadding(top: 10),
-                                          child: Text("Пароль должен содержать 8 символов и по крайне мере, одну цифру и один символ, такой как !·\$%&?",
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.left,
-                                              style: AppStyle
-                                                  .txtSFProDisplayLight12)),
+                                          child: SizedBox(
+                                            width: size.width - 32,
+                                            child: Text("Пароль должен содержать 8 символов и по крайне мере, одну цифру и один символ, такой как !·\$%&?",
+                                                textAlign: TextAlign.left,
+                                                style: AppStyle
+                                                    .txtSFProDisplayLight12),
+                                          )),
                                       CustomTextFormField(
                                           focusNode: FocusNode(),
                                           controller: passwordController,
@@ -206,6 +208,16 @@ class K2Screen extends GetWidget<K2Controller> {
                                           },
                                           textInputAction:
                                           TextInputAction.done),
+                                      Padding(padding: getPadding(top: 26, bottom: 26),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ServicesButton(svgIcon: ImageConstant.appleSVG, serviceName: 'Apple', onTap: () async => await controller.authWithApple(context)),
+                                            SizedBox(width: 10,),
+                                            ServicesButton(svgIcon: ImageConstant.googleSVG, serviceName: 'Google', onTap: () async => await controller.authWithGoogle(context)),
+                                          ],
+                                        ),
+                                      ),
                                       GetBuilder(
                                         builder: (K2Controller controller) => Column(
                                           children: [
@@ -214,7 +226,6 @@ class K2Screen extends GetWidget<K2Controller> {
                                                     "Принимаю Согласие на обработку персональных данных ",
                                                 value: checkbox,
                                                 onTapOnText: () => Navigator.pushNamed(context, AppRoutes.aboutApp),
-                                                margin: getMargin(top: 39),
                                                 fontStyle: CheckboxFontStyle
                                                     .SFProDisplayLight12,
                                                 onChange: (value) {
@@ -222,15 +233,6 @@ class K2Screen extends GetWidget<K2Controller> {
                                                   controller.update();
                                                 }),
 
-                                        Padding(padding: getPadding(top: 26, bottom: 26),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            ServicesButton(svgIcon: ImageConstant.appleSVG, serviceName: 'Apple', onTap: () async => await controller.authWithApple(context)),
-                                            ServicesButton(svgIcon: ImageConstant.googleSVG, serviceName: 'Google', onTap: () async => await controller.authWithGoogle(context)),
-                                          ],
-                                        ),
-                                        ),
                                         Align(
                                             alignment: Alignment.centerRight,
                                             child: Padding(

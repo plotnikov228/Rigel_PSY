@@ -50,4 +50,12 @@ extension DateInString on int {
         return 'Декабря';
     }
   }
+
 }
+
+extension DateTimeInString on DateTime {
+  String dateInText() {
+    return '''${this.day} ${this.month.monthInText()} ${this.year}''';
+  }
+}
+

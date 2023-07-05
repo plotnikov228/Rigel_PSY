@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:408583851820:android:7e8ce81dfbf18157f8e689",
+        "mobilesdk_app_id": "1:408583851820:android:ee1aca216e6a55c1f8e689",
         "android_client_info": {
-          "package_name": "com.listenmebabysapplication.app"
+          "package_name": "com.rigel_psy.app"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "408583851820-gcrn80s3cu2av4cqm2jhhf67ei007p8r.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.listenmebabysapplication.app",
-            "certificate_hash": "4ce7651ef56a9844dbe9f186c101b4b5b61a3ef5"
-          }
-        },
         {
           "client_id": "408583851820-koct3sn1t83i0va28krd9j26ktljgjpt.apps.googleusercontent.com",
           "client_type": 3

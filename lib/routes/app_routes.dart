@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:listenmebaby71_s_application17/presentation/initial_setup/sign_in/verification_screen/verification_screen.dart';
+import 'package:listenmebaby71_s_application17/presentation/charts/concrete_pill/concrete_pill_screen.dart';
 
 import '../presentation/charts/charts_calendar/k62_screen.dart';
 import '../presentation/charts/charts_screen/k61_screen.dart';
 import '../presentation/enter_password_screen/enter_password_screen.dart';
 import '../presentation/initial_setup/recomendation_buy_tariff_screen/k4_screen.dart';
+import '../presentation/initial_setup/send_pushes_screen/send_pushe_screen.dart';
 import '../presentation/initial_setup/sign_in/reset_password_screen/reset_password_screen.dart';
 import '../presentation/initial_setup/set_reminders_screen/k3_screen.dart';
 import '../presentation/initial_setup/sign_in/sign_in_screen/k2_screen.dart';
@@ -39,6 +41,9 @@ import '../presentation/settings/settings_promo_screen/k16_screen.dart';
 import '../presentation/settings/settings_reminders_screen/k12_page.dart';
 import '../presentation/settings/settings_repeat_password_screen/k9_screen.dart';
 import '../presentation/settings/settings_screen/k6_screen.dart';
+import '../presentation/settings/settings_screen/k6_screen.dart';
+import '../presentation/settings/settings_pills/settings_pills_calendar/settings_pills_calendar_screen.dart';
+import '../presentation/settings/settings_pills/settings_pills/settings_pills_screen.dart';
 import '../presentation/settings/settings_set_password/one_screen.dart';
 import '../presentation/settings/settings_subscription_screen/k13_screen.dart';
 import '../presentation/settings/settings_tariff_activated_screen/k17_screen.dart';
@@ -127,8 +132,15 @@ static const String enterPasswordScreen = '/enter_password_screen';
 
   static const String verify = '/verify';
 
-  static const String resetPassword = '/verify';
+  static const String resetPassword = '/reset_password';
 
+  static const send_pushes = '/send_pushes';
+
+  static const pills_calendar = '/pills_calendar';
+
+  static const pills = '/pills';
+
+  static const concrete_pill = '/concrete_pill';
 
   static String currentRoute = main;
 
@@ -143,6 +155,7 @@ static const String enterPasswordScreen = '/enter_password_screen';
     resetPassword: (context) => ResetPasswordScreen(),
     setRemindersScreen: (context) => K3Screen(),
     recommendationBuyTariff: (context) => K4Screen(),
+    send_pushes: (context) => SendPushesScreen(),
     // settings
     settings: (context) => K6Screen(),
     aboutApp: (context) => K7Screen(),
@@ -159,6 +172,9 @@ static const String enterPasswordScreen = '/enter_password_screen';
     profile: (context) => K18Screen(),
     data_and_recovery: (context) => DataAndRecoveryScreen(),
     recovery: (context) => RecoveryScreen(),
+    pills_calendar: (context) => PillsCalendarScreen(),
+    pills: (context) => PillsScreen(),
+    concrete_pill: (context) => ConcretePillScreen(),
     // main
     main: (context) => K20Screen(),
     addEmotion: (context) => K24Page(),

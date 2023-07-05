@@ -23,31 +23,31 @@ class HiveDB {
       final boxData = await getBox(item);
       var listToReturn = boxData.map((e) => jsonDecode(e).toString()).toList();
       if (listToReturn.isNotEmpty) {
-        dataForTransfer += (item + '{' + listToReturn.join(',') + '},');
+        String _endPoint = ',';
+        if(item == HiveDBTags.dayEvents) _endPoint = '';
+        dataForTransfer += ('\"$item\":' + '[' + boxData.join(',').toString() + ']$_endPoint');
       }
     }
     dataForTransfer = '{$dataForTransfer}';
     print(dataForTransfer);
-    return await _createFileToTransfer(jsonDecode(dataForTransfer));
+    return await _createFileToTransfer(dataForTransfer);
   }
 
-  static Future<File> _createFileToTransfer(Map content) async {
+  static Future<File> _createFileToTransfer(String content) async {
     final file = File(_pathDataForTransfer!);
-
-    /*if (!(await file.exists())) {
-      await file.
-      await file.create();
-    }*/
-    await file.writeAsString(jsonEncode(content)).then((value) async => await file.create(recursive: true));
+    await file.writeAsString(content).then((value) async => await file.create(recursive: true));
 
     return file;
   }
 
   static Future getHiveDBFromFile(String path) async {
-    Map<String, dynamic> data = jsonDecode(await File(path).readAsString());
+    final file = File(path);
+    Map<String, dynamic> data = jsonDecode(await file.readAsString());
     for (var item in HiveDBTags.allTagsForTransfer) {
-      List<Map<String, dynamic>> maps = data[item];
+      await openBox(item);
+      List<dynamic>? maps = data[item];
       await deleteBox(item);
+      if (maps != null)
       for (final e in maps) {
         await setBox(e, item);
       }
@@ -63,7 +63,7 @@ class HiveDB {
   }
 
   static Future<List> getBox(String section) async {
-    await Hive.openBox(section);
+    await openBox(section);
     List<dynamic> list = [];
     for (int i = 0; i < Hive.box(section).length; i++) {
       list.add(Hive.box(section).getAt(i)!);
@@ -73,7 +73,7 @@ class HiveDB {
 
   // in cycle
   static Future setBox(dynamic value, String section) async {
-    await Hive.openBox(section);
+    await openBox(section);
     Hive.box(section).add(jsonEncode(value));
   }
 }

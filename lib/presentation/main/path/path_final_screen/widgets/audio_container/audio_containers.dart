@@ -36,18 +36,25 @@ class AudioContainers extends StatelessWidget {
         future: _durations(),
         builder: (context, AsyncSnapshot<List<Duration?>>snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
-            return SizedBox(
-                height: 100,
-                width: 100,
-                child: CircularProgressIndicator(color: ColorConstant.cyan700,));
+            return Center(
+              child: SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: CircularProgressIndicator(color: ColorConstant.cyan700,)),
+            );
           } if(snapshot.hasData)
-          return Wrap(
-            children: List<Widget>.generate(audios.length, (index) => AudioContainerWidget(audioCardModel: audios[index], index: startIndex + index, audioPlayer: controller.audioInstance, maxDuration: (snapshot.data)![index] ?? Duration.zero, currentAudioIndex: controller.currentAudioIndex, controller: controller)),
+          return Padding(
+            padding: getPadding( left: 10, right: 10),
+            child: Wrap(
+              children: List<Widget>.generate(audios.length, (index) => AudioContainerWidget(audioCardModel: audios[index], index: startIndex + index, audioPlayer: controller.audioInstance, maxDuration: (snapshot.data)![index] ?? Duration.zero, currentAudioIndex: controller.currentAudioIndex, controller: controller)),
+            ),
           );
-          return SizedBox(
-              height: 100,
-              width: 100,
-              child: CircularProgressIndicator(color: ColorConstant.cyan700,));
+          return Center(
+            child: SizedBox(
+                height: 50,
+                width: 50,
+                child: CircularProgressIndicator(color: ColorConstant.cyan700,)),
+          );
         },
       )
     );

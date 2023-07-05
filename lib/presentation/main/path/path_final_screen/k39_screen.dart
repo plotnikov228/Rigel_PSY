@@ -81,7 +81,9 @@ class K39Screen extends GetWidget {
                                  style: AppStyle.txtH1,
                                ),
                              ),
-                             GetBuilder(builder: (K39Controller _c) => VoiceButton(currentState: controller.currentState, controller: controller,)),
+                             Padding(
+                                 padding: getPadding(left: 10, right: 10),
+                                 child: GetBuilder(builder: (K39Controller _c) => VoiceButton(currentState: controller.currentState, controller: controller,))),
                              Padding(
                                padding: getPadding(
                                  top: 30,

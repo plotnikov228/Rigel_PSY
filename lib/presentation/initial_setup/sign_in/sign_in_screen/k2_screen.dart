@@ -129,6 +129,7 @@ class K2AuthScreen extends GetWidget<K2AuthController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ServicesButton(svgIcon: ImageConstant.appleSVG, serviceName: 'Apple', onTap: () async => await controller.authWithApple(context)),
+                          SizedBox(width: 10,),
                           ServicesButton(svgIcon: ImageConstant.googleSVG, serviceName: 'Google', onTap: () async => await controller.authWithGoogle(context)),
                         ],
                       ),

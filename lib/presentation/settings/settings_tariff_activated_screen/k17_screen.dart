@@ -11,12 +11,8 @@ import 'repository.dart';
 class K17Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tariff = ModalRoute.of(context)!.settings.arguments as TariffModel;
-
     Timer(Duration(seconds: 3), () async {
       try{
-      final controller = K17Controller();
-      await controller.updateTariff(tariff);
       AppRoutes.currentRoute = AppRoutes.main;
       Navigator.pushReplacementNamed(context, AppRoutes.main);
       } catch(_) {

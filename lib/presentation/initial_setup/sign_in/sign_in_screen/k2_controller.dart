@@ -31,6 +31,7 @@ class K2AuthController extends GetxController {
   }
 
   Future authWithGoogle (context) async {
+
     final repo = SignInRepository<K2AuthController>(context, this);
     await repo.signInWithGoogle();
   }

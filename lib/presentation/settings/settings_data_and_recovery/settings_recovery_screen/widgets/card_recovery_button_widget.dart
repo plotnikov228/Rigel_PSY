@@ -17,6 +17,8 @@ Widget CardRecoveryButtonWidget(BuildContext context,
   return InkWell(
       onTap: onTap,
       child: Container(
+        height: getVerticalSize(48),
+          width: size.width - 32,
           margin: getMargin(top: 1),
           padding: getPadding(left: 7, top: 5, right: 7, bottom: 5),
           decoration: AppDecoration.outlineBluegray80014
@@ -25,6 +27,8 @@ Widget CardRecoveryButtonWidget(BuildContext context,
             Padding(
                 padding: getPadding(left: 5, top: 5, bottom: 2),
                 child: Column(
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title,
                         overflow: TextOverflow.ellipsis,

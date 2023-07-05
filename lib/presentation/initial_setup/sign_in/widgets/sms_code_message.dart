@@ -33,7 +33,7 @@ CustomMessageBox smsCodeMessage<T>(BuildContext context,
                       controller: smsController,
                       hintText: "",
                       variant: !error
-                          ? TextFormFieldVariant.UnderLineGray50
+                          ? TextFormFieldVariant.UnderLineGray8008c
                           : TextFormFieldVariant.UnderLineRed,
                       fontStyle: TextFormFieldFontStyle.SFProDisplayRegular14,
                       alignment: Alignment.center,

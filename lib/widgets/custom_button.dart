@@ -15,9 +15,12 @@ class CustomButton extends StatelessWidget {
       this.text,
       this.prefixWidget,
       this.suffixWidget,
+        this.centralWidget,
       this.standardPadding});
 
   ButtonShape? shape;
+
+  final Widget? centralWidget;
 
   ButtonPadding? padding;
 
@@ -70,25 +73,23 @@ class CustomButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           prefixWidget ?? SizedBox(),
-          Center(
-            child: Text(
-              text ?? "",
-              textAlign: TextAlign.center,
-              style: _setFontStyle(),
-            ),
-          ),
+          _getCentralWidget (),
           suffixWidget ?? SizedBox(),
         ],
       );
     } else {
-      return Center(
-        child: Text(
-          text ?? "",
-          textAlign: TextAlign.center,
-          style: _setFontStyle(),
-        ),
-      );
+      return _getCentralWidget ();
     }
+  }
+
+  _getCentralWidget () {
+    return Center(
+      child: centralWidget ?? Text(
+        text ?? "",
+        textAlign: TextAlign.center,
+        style: _setFontStyle(),
+      ),
+    );
   }
 
   _buildTextButtonStyle() {
@@ -143,6 +144,10 @@ class CustomButton extends StatelessWidget {
         return ColorConstant.gray50;
       case ButtonVariant.Base:
         return ColorConstant.fromHex('#e0e8e8');
+      case ButtonVariant.White:
+        return Colors.white;
+      case ButtonVariant.White24:
+        return Colors.white.withOpacity(24);
       default:
         return ColorConstant.whiteA70038;
     }
@@ -288,7 +293,10 @@ enum ButtonVariant {
   OutlineBluegray60014,
   OutlineBluegray70038,
   Almost,
-  Base
+  Base,
+  White,
+  White24
+
 }
 enum ButtonFontStyle {
   SFProDisplayRegular12,

@@ -49,8 +49,8 @@ class AudioContainerWidget extends StatelessWidget {
             await audioPlayer.pause();
           },
           loadFun: () async {},
-          onChange: (Duration duration) {
-            audioPlayer.seek(duration);
+          onChange: (Duration duration) async {
+            await audioPlayer.seek(duration);
             controller.update();
           },
         ),

@@ -61,7 +61,6 @@ class ResetPasswordScreen extends StatelessWidget {
                       child: SizedBox(
                         width: getVerticalSize(243),
                         child: Text("Введите номер телефона, указанный при регистрации",
-                            overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.left,
                             style: AppStyle
                                 .txtSFProDisplayLight16),

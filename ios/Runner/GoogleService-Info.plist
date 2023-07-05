@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>408583851820-6lodf34gi09t60jqm3vcfi5l8c80itpk.apps.googleusercontent.com</string>
+	<string>408583851820-d1m3evieiu0ttbnt15gp3m2j9j0dqpn9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.408583851820-6lodf34gi09t60jqm3vcfi5l8c80itpk</string>
+	<string>com.googleusercontent.apps.408583851820-d1m3evieiu0ttbnt15gp3m2j9j0dqpn9</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>408583851820-dn0j9nd876oipg7cq4rp0qp4kobf1349.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCcSAMOzyDlfD0sDKZSgD_-Vs_VHLIqDaQ</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.listenmebabysapplication.app</string>
+	<string>com.rigel-psy.app</string>
 	<key>PROJECT_ID</key>
 	<string>rigel-psy</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:408583851820:ios:27d47f309683c1d6f8e689</string>
+	<string>1:408583851820:ios:eb5750f18a34d160f8e689</string>
 </dict>
 </plist>

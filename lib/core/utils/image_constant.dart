@@ -16,13 +16,32 @@ class ImageConstant {
       'assets/images/img_location_gray_800_63x81.svg';
 
   static String googleSVG =
-      'assets/images/googleSVG';
+      'assets/images/googleSVG.svg';
 
   static String appleSVG =
-      'assets/images/appleSVG';
+      'assets/images/appleSVG.svg';
+
+  static String imageCalendar =
+      'assets/images/calendar.svg';
+
+  static String imgHandWithPill =
+      'assets/images/hand_with_pill.svg';
+
+  static String imgCalendarHand =
+      'assets/images/hand_with_pill_from_calendar.svg';
+
+  static String imgAdd =
+      'assets/images/add.svg';
+
+  static String imageClock =
+      'assets/images/clock.svg';
 
   static String imgPill =
       'assets/images/pill.svg';
+
+
+  static String imgSmallLogo =
+      'assets/images/rigel_small_logo.svg';
 
   static String imgClip =
       'assets/images/clip.svg';

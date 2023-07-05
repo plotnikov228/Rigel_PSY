@@ -5,12 +5,13 @@ import 'models/pill_model.dart';
 
 class PillsRepo {
 
-  static const _eventTag = HiveDBTags.bodyParts;
+  static const _eventTag = HiveDBTags.pills;
 
   Future<List<PillModel>> getEvent() async {
     var listToReturn = (await HiveDB.getBox(_eventTag))
         .map((e) => PillModel.fromJson(jsonDecode(e)))
         .toList();
+    if(listToReturn.isEmpty) return [];
     return listToReturn;
   }
 

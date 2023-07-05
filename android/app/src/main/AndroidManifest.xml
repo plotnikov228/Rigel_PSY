@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.listenmebabysapplication.app">
+    package="com.rigel_psy.app">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -52,6 +52,13 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.APP_BROWSER" />
+                <!--Agreement part-->
+                <data
+                    android:host="hong.com"
+                    android:path="/product"
+                    android:scheme="app" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

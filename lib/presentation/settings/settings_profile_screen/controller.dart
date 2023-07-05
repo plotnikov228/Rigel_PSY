@@ -1,18 +1,75 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:listenmebaby71_s_application17/core/db/firebase_firestore/data/repository.dart';
+import 'package:listenmebaby71_s_application17/core/utils/string_extension.dart';
 
+import '../../../core/services/datasource_service.dart';
 import '../../../core/user_data/user.dart';
 import '../../../core/utils/color_constant.dart';
 import '../../../core/utils/size_utils.dart';
+import '../../../routes/app_routes.dart';
 import '../../../widgets/custom_message_box.dart';
 import 'text_field_formatter.dart';
 
 class K18Controller extends GetxController {
-  final oldController = TextEditingController();
-  final numberController = TextEditingController();
-  final loginController = TextEditingController();
+
+  final oldController = TextEditingController(text: CurrentUser.user.old.toString());
+  final numberController = TextEditingController(text: CurrentUser.user.number!);
+  final loginController = TextEditingController(text: CurrentUser.user.login!);
+  final newPasswordController = TextEditingController();
+  final passwordRepeatController = TextEditingController();
+  final oldPasswordController = TextEditingController();
+
+  final instance = FirebaseFirestore.instance;
+
+  Future saveData (context) async {
+    try {
+      final fireStoreRepo = FireStoreRepositoryImpl();
+      bool goNext = true;
+      if(newPasswordController.text != '' && passwordRepeatController.text != '' && oldPasswordController.text != '')
+        goNext = await _checkPassword(context);
+      if(goNext) {
+        if(newPasswordController.text != '' && passwordRepeatController.text != '' && oldPasswordController.text != '') {
+          await fireStoreRepo.updateUserDataPassword(password: newPasswordController.text);
+        }
+        if(numberController.text != CurrentUser.user.number!)
+        await CurrentUser.repo.setNumber(numberController.text);
+        if(loginController.text != CurrentUser.user.number!)
+        await CurrentUser.repo.setLogin(loginController.text);
+        if(int.parse( oldController.text) != CurrentUser.user.old!)
+        await CurrentUser.repo.setOld(int.parse(oldController.text));
+        await CurrentUser.repo.setGender(CurrentUser.user.male!);
+        showDialog(context: context, builder: (context) => CustomMessageBox(title: 'Профиль', content: 'Данные профиля были успешно изменены'));
+      }
+    } catch (_) {
+      print(_.toString());
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Произошла ошибка, проверьте подключение к интрнету или попробуйте позже')));
+
+    }
+  }
+
+  Future<bool> _checkPassword (context) async {
+    final hash = (await instance.collection('UsersData').doc(CurrentUser.repo.userId()).get()).data()!['password'];
+    print(hash);
+    print(oldPasswordController.text.md5());
+    if(oldPasswordController.text.md5() != hash) {
+      showDialog(context: context, builder: (context) => CustomMessageBox(title: 'Профиль', content: 'Неверно указан старый пароль'));
+      return false;
+    }
+    return true;
+  }
+
+  Future signOut (context) async {
+    await FirebaseAuth.instance.signOut();
+    DataSourceService.setRemoteDataSource();
+    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.signUp, (route) => false);
+  }
 
   Future updateNumber (BuildContext context, String result)async {
     final instance = FirebaseFirestore.instance;
@@ -23,8 +80,7 @@ class K18Controller extends GetxController {
       if (data != null) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Пользователь с таким номером телефона существует')));
-      } else {
-        await CurrentUser.repo.setNumber(result);
+        numberController.text = CurrentUser.user.number!;
       }
     } catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ошибка, проверьте подключение к интернету или попробуйте позднее')));
@@ -40,6 +96,7 @@ class K18Controller extends GetxController {
             title: 'Профиль',
             content: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     height: getVerticalSize(44),
@@ -107,6 +164,8 @@ class K18Controller extends GetxController {
             title: 'Профиль',
             content: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
                   SizedBox(
                     height: getVerticalSize(44),
@@ -174,6 +233,8 @@ class K18Controller extends GetxController {
             title: 'Профиль',
             content: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
                   SizedBox(
                     height: getVerticalSize(44),
@@ -232,4 +293,6 @@ class K18Controller extends GetxController {
           ),
         );
       });
+
+
 }

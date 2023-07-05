@@ -43,10 +43,11 @@ class ExerciseContentController extends GetxController {
           .getRange(1, dayEvent.whatEmotion!.length)
           .toList();
     }
-
-
+    mainAudios = [];
+    additionalAudios = [];
     for (var audio in audios) {
       try {
+
         if ((audio.emotions ?? [])
             .map((e) => e.toLowerCase())
             .contains(mainEmotion!.name.toLowerCase())) {
@@ -64,6 +65,7 @@ class ExerciseContentController extends GetxController {
                   : '${(await getApplicationDocumentsDirectory()).path}/${audio.folder}/${audio.fileName}.${audio.format}'));
         }
         if (additionalEmotions != null) {
+
           for (var item in additionalEmotions!) {
             if ((audio.emotions ?? [])
                 .map((e) => e.toLowerCase())

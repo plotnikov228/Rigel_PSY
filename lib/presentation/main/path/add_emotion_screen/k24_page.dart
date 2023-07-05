@@ -94,25 +94,20 @@ class K24Page extends GetWidget {
                               style: AppStyle.txtSFProDisplayLight14Gray800a0,
                             ),
                           ),
-                          Padding(
-                            padding: getPadding(
-                              top: 15,
-                            ),
-                            child: Center(
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width - 32,
-                                child:
-                                Wrap(
-                                    children: controller.characterList.map((el) => Padding(
-                                        padding: getPadding(right:  MediaQuery.of(context).size.width / 30),
-                                        child: EventCard(model: el, onTap: () {
-                                          controller.customEvent.svgPath = el.svgPath;
-                                          controller.update();
-                                        }, isSelect: controller.contain(el)))).toList(),
-                                  ),
+              Padding(
+                padding: getPadding(
+                  top: 15,
+                ),
+                child: Wrap(
+                  children: controller.characterList.map((el) => Padding(
+                      padding: getPadding(right:  MediaQuery.of(context).size.width / 30),
+                      child: EventCard(model: el, onTap: () {
+                                        controller.customEvent.svgPath = el.svgPath;
+                                        controller.update();
+                                      }, isSelect: controller.contain(el)))).toList(),
+                                ),
 
-                              ),
-                            )
+
                           ),
                           Padding(
                             padding: getPadding(
@@ -156,11 +151,9 @@ class K24Page extends GetWidget {
                           ),
                           Padding(
                             padding: getPadding(
-                              top: 16,
+                              top: 15,
                             ),
                             child: Wrap(
-                              spacing: 12,
-
                               children: controller.placeList.map((el) => Padding(
                                   padding: getPadding(right:  MediaQuery.of(context).size.width / 30),
                                   child: EventCard(onTap: () {

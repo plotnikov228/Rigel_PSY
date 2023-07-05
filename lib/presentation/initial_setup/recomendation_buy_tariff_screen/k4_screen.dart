@@ -97,6 +97,6 @@ class K4Screen extends StatelessWidget {
   }
 
   onTapOne(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.main);
+    Navigator.pushNamed(context, AppRoutes.send_pushes);
   }
 }

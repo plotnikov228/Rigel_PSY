@@ -196,9 +196,9 @@ class K27Repo {
     EventModel('Сострадание +', ImageConstant.imgCutCyan70021x19),
     EventModel('Обожание -', ImageConstant.imgSettings21x21),
     EventModel('Сострадание -', ImageConstant.imgCutCyan70021x19),
-    EventModel('Сопричаствность +', ImageConstant.imgCutCyan70034x34),
+    EventModel('Сопричастность +', ImageConstant.imgCutCyan70034x34),
     EventModel('Сочувствие +', ImageConstant.imgClock21x22),
-    EventModel('Сопричаствность -', ImageConstant.imgCutCyan70034x34),
+    EventModel('Сопричастность -', ImageConstant.imgCutCyan70034x34),
     EventModel('Сочувствие -', ImageConstant.imgClock21x22),
   ];
 }

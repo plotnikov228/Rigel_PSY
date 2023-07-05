@@ -121,6 +121,7 @@ class K10Screen extends GetWidget<K10Controller> {
                                               ));
                                       try {
                                         await controller.createOffer();
+                                        showDialog(context: context, builder: (context) => CustomMessageBox(title: 'Предложение по улучшению', content: 'Предложение было отправлено'));
                                       } catch(_) {
                                         print(_);
 

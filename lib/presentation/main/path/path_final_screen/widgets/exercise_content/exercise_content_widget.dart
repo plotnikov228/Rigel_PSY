@@ -61,12 +61,12 @@ class ExerciseContentWidget extends StatelessWidget {
           padding: getPadding(
             top: 12,
           ),
-          child: SizedBox(
-            width: getHorizontalSize(135),
-            child: Expanded(
+          child: Padding(
+            padding: getPadding(left: 10, right: 10),
+            child: SizedBox(
+              width: getHorizontalSize(135),
               child: Text(
                 'Нажмите, чтобы увидеть связанные эмоции',
-                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,
                 style: AppStyle.txtSFProDisplayLight10Gray800,
               ),
@@ -92,13 +92,16 @@ class ExerciseContentWidget extends StatelessWidget {
           future: controller.getAudios(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator(color: ColorConstant.cyan700,);
+              return Center(
+                child: SizedBox(
+                  width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: ColorConstant.cyan700,)),
+              );
             }
             return Column(children: [
               Padding(
-                padding: getPadding(top: 12,
-                  left: 10,
-                  right: 10,),
+                padding: getPadding(top: 12,),
                 child: AudioContainers(audios: controller.mainAudios, controller: controller,),
               ),
               Visibility(
@@ -132,7 +135,7 @@ class ExerciseContentWidget extends StatelessWidget {
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             physics: PageScrollPhysics(),
-                            itemCount: controller.additionalEmotions!.length, itemBuilder: (BuildContext context, int index) {
+                            itemCount: controller.additionalEmotions?.length ?? 0, itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: getPadding(right: 12),
                             child: EventCard(

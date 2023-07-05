@@ -8,7 +8,7 @@ import 'package:listenmebaby71_s_application17/core/app_export.dart';
 import '../../../../widgets/custom_message_box.dart';
 import '../controller.dart';
 import '../models/notification_model.dart';
-import '../text_field_time_formatter.dart';
+import '../../../../core/utils/text_field_formatters/text_field_time_formatter.dart';
 
 class ListtimeItemWidget extends StatefulWidget {
   K12NotificationModel model;

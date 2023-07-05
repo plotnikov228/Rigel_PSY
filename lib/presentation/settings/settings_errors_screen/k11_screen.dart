@@ -110,6 +110,7 @@ class K11Screen extends GetWidget {
                                               ));
                                       try {
                                         await controller.createOffer();
+                                        showDialog(context: context, builder: (context) => CustomMessageBox(title: 'Предложение по улучшению', content: 'Предложение было отправлено'));
                                       } catch(_) {
                                         print(_);
                                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ошибка, попробуйте позже или проверьте подключение к интернету')));
