@@ -126,17 +126,14 @@ class BottomSheetWidget extends StatelessWidget {
                     builder: (K52Controller _c) => Padding(
                       padding: getPadding(left: 6),
                       child: Wrap(
-                          children: list is List<EventModel>
-                              ? list!.map((el) => Padding(
-                                      padding: getPadding(
-                                          right: MediaQuery.of(context).size.width /
-                                              30,
-                                          bottom: 16),
-                                      child: EventCard(
+                          spacing: 12,
 
-                                        model: el as EventModel,
-                                        onTap: () => onChangeEventModel!(el), isSelect: false,
-                                      )))
+                          children: list is List<EventModel>
+                              ? list!.map((el) => EventCard(
+
+                                model: el as EventModel,
+                                onTap: () => onChangeEventModel!(el), isSelect: false,
+                              ))
                                   .toList()
                               : list is List<K32Model> ? list!.map((e) => Padding(
                                           padding:

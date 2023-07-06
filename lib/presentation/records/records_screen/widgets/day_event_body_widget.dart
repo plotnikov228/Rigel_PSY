@@ -32,7 +32,7 @@ Widget dayEventBodyWidget (DayEventModel dayEventModel, bool isNotFirst) {
             child: Row(
               children: [
                  Padding(
-                    padding: getPadding(left: 6, top: 1),
+                    padding: getPadding(left: 6, top: 1, right: 6),
                     child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
