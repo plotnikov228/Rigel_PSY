@@ -19,6 +19,7 @@ dependencies:
   image_picker:
   sleek_circular_slider:
     path: ./sleek_circular_slider-2.0.1-v2/
+  path_provider: ^2.0.15
   flutter_svg_provider: ^1.0.3
   get: ^4.6.5
   intl: ^0.17.0
@@ -53,7 +54,6 @@ dependencies:
   crypto: ^3.0.3
 
   yookassa_payments_flutter: ^1.0.6
-  appscheme: ^1.0.8
   uuid: ^3.0.7
 
 
